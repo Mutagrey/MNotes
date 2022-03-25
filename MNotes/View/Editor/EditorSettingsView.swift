@@ -11,17 +11,25 @@ struct EditorSettingsView: View {
     @EnvironmentObject var settings: EditorSettingsViewModel
     
     var body: some View {
-        if settings.showEditorSettings {
+        if settings.showTextSettings {
             VStack(spacing: 0.0) {
                 HStack {
                     titleSetting(title: "Text")
                     Spacer()
                     closeButton
                 }
+                .onTapGesture {
+                    settings.showTextSettings.toggle()
+                }
                 FontFromatView()
+//                    .padding(.horizontal)
             }
-            .frame(height: 200)
-            .background(Color(UIColor.quaternarySystemFill))
+            .padding(.bottom)
+//            .frame(height: 200)
+            .background(
+                Color(UIColor.quaternarySystemFill)
+            )
+
         }
     }
 }
@@ -36,7 +44,7 @@ extension EditorSettingsView {
     // Close Button
     private var closeButton: some View{
         Button {
-            settings.showEditorSettings.toggle()
+            settings.showTextSettings.toggle()
         } label: {
             Image(systemName: "xmark")
                 .padding()

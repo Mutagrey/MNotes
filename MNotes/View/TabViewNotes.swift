@@ -12,11 +12,6 @@ struct TabViewNotes: View {
     @State private var selectedNoteID: String = ""// = 1
     private let maxHeight: CGFloat = 250
     
-    init() {
-//        UIPageControl.appearance().currentPageIndicatorTintColor = .red
-//        UIPageControl.appearance().pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.2)
-    }
-    
     var body: some View {
         if vm.notes.filter({ $0.isPinned }).count > 0 {
             TabView(selection: $selectedNoteID) {
@@ -42,7 +37,6 @@ struct TabViewNotes: View {
                 }
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-//            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
             .frame(height: maxHeight)
             .onAppear{
                 if let firstNote = vm.notes.filter({ $0.isPinned }).first {

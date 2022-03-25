@@ -32,12 +32,15 @@ struct NoteEditor: View {
                 Spacer(minLength: 0)
                 EditorSettingsView()
                     .ignoresSafeArea()
-                    .animation(.easeInOut, value: settings.showEditorSettings)
+                    .opacity(settings.showTextSettings ? 1 : 0)
+                    .animation(.easeInOut, value: settings.showTextSettings)
                     .transition(.move(edge: .bottom))
-                editMenuBar
-                    .frame(maxWidth: .infinity)
-                    .padding(.horizontal)
-                    .background(Color(UIColor.secondarySystemBackground).opacity(0.7).ignoresSafeArea(.container, edges: .bottom))
+                if dismiss {
+                    editMenuBar
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal)
+                        .background(Color(UIColor.secondarySystemBackground).opacity(0.7).ignoresSafeArea(.keyboard, edges: .bottom))
+                }
 
             }
             .overlay(CategoryPickerSelector(show: $showCategoryPicker, category: $note.category, size: 20, categoryPosition: .vertical), alignment: .topTrailing)
@@ -45,12 +48,14 @@ struct NoteEditor: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     topToolBar(note: note)
                 }
+                ToolbarItemGroup(placement: .bottomBar) {
+                    if !dismiss { editMenuBar }
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
             // Update and save changes
             .onDisappear {
                 if note.wordsCount == 0 {
-//                    vm.notes.remove(at: noteID)
                     vm.removeNote(withID: note.id)
                 } else {
                     vm.updateNote(note: note)
@@ -85,7 +90,7 @@ struct NoteEditor_Previews: PreviewProvider {
 // Custom button
 struct CustomEditBarButton: View {
     
-    let systemIconName: String
+    let systemIconName: String?
     let title: String?
     let action: () -> Void
     
@@ -94,7 +99,7 @@ struct CustomEditBarButton: View {
             action()
         } label: {
             VStack{
-                Image(systemName: systemIconName)
+                if let systemIconName = systemIconName { Image(systemName: systemIconName) } else { Text("Button") }
                 if let title = title { Text("\(title)") }
             }
             .padding()
@@ -113,8 +118,8 @@ extension NoteEditor {
             
             Group {
                 CustomEditBarButton(systemIconName: "textformat.alt", title: nil) {
-                    settings.showEditorSettings.toggle()
-                    settings.selectedSetting = .text
+                    settings.showTextSettings.toggle()
+                    dismiss = false
                 }
                 
 //                CustomEditBarButton(systemIconName: "camera", title: nil) {
@@ -130,15 +135,22 @@ extension NoteEditor {
                     Alert(title: Text("Confirm Deletion"),
                         message: Text("Are you sure you want to delete?"),
                         primaryButton: .destructive(Text("Delete")) {
-                        vm.removeNote(withID: selectedNoteID ?? "")
-                        //call delete method
+                        note.attributedText = ""
                         },
                         secondaryButton: .cancel())
                 }
             }
-            CustomEditBarButton(systemIconName: "", title: (dismiss ? "Done" : "Edit")) {
+            
+            Button {
                 dismiss.toggle()
+            } label: {
+                Text("\(dismiss ? "Done" : "Edit")")
+                    .padding()
             }
+            .frame(maxWidth: .infinity)
+//            CustomEditBarButton(systemIconName: "", title: (dismiss ? "Done" : "Edit")) {
+//                dismiss.toggle()
+//            }
         }
 //        .padding(.horizontal)
 //        .background(Color(UIColor.secondarySystemBackground).opacity(0.7).ignoresSafeArea(.container, edges: .bottom))

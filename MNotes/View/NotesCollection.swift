@@ -122,11 +122,10 @@ extension NotesCollection {
         HStack {
             Circle()
                 .fill(category.color)
-                .frame(width: 7, height: 7)
+                .frame(width: 9, height: 9)
             Text("\(category.rawValue.capitalized)")
                 .font(.caption)
                 .foregroundColor(Color.primary)
-            //            .frame(maxWidth: .infinity, alignment: .center)
         }
         .padding(.vertical, 6)
         .padding(.horizontal)

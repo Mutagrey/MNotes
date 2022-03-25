@@ -13,7 +13,7 @@ struct Home: View {
     @State private var showCategoryPicker: Bool = false
     @State private var showSettings: Bool = false
     @AppStorage("sortBy") var sortBy: SortBy = .category
-    @State private var deletionAlert: Bool = false
+//    @State private var deletionAlert: Bool = false
     
     var body: some View {
         NavigationView {
@@ -27,7 +27,7 @@ struct Home: View {
                         editButton
                     }
                     ToolbarItemGroup(placement: .bottomBar) {
-                        bottomToolbar
+                            bottomToolbar
                     }
                     ToolbarItemGroup(placement: .navigationBarLeading) {
                         settingsButton
@@ -72,22 +72,19 @@ extension Home {
                     .transition(.move(edge: .trailing))
             } else {
                 if !showCategoryPicker {
-                    sortByMenu
-                        .transition(.move(edge: .leading))
-                    Spacer()
+//                    sortByMenu
+//                        .transition(.move(edge: .leading))
+//                    Spacer()
                     notesCount
                         .opacity(vm.isEditable ? 0 : 1)
                         .transition(.scale)
-//                        .padding()
-                    Spacer()
-                    Button("") {}
-//                    .padding()
+//                    Spacer()
+//                    Button("") {}
                 }
             }
         }
         .opacity(showCategoryPicker ? 0 : 1)
     }
-    
     
     // Edit Collection Button
     private var settingsButton: some View {
@@ -120,7 +117,6 @@ extension Home {
             }
         }
         .opacity(showCategoryPicker ? 0 : 1)
-
     }
     // NotesCount
     private var notesCount: some View {
@@ -142,8 +138,7 @@ extension Home {
     // Remove Button
     private var removeButton: some View {
         Button {
-            deletionAlert.toggle()
-//            vm.removeSelectedNotes()
+            vm.isDeletePressed.toggle()
         } label: {
             HStack {
                 selectedCount
@@ -156,12 +151,11 @@ extension Home {
             .mask(Capsule())
         }
         .disabled(vm.selectedNotes.count == 0)
-        .alert(isPresented: $deletionAlert) {
+        .alert(isPresented: $vm.isDeletePressed) {
             Alert(title: Text("Confirm Deletion"),
                 message: Text("Are you sure you want to delete selected Notes?"),
                 primaryButton: .destructive(Text("Delete")) {
                 vm.removeSelectedNotes()
-                //call delete method
                 },
                 secondaryButton: .cancel())
         }

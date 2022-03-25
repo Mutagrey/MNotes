@@ -26,13 +26,20 @@ class NotesViewModel: ObservableObject {
     
     @Published var isDeletePressed: Bool = false
     @Published var isEditable: Bool = false
-        
+    
     let dataService = NotesDataService.instance // manager that loads notes from local folders
     
     private var noteCancelables = Set<AnyCancellable>() // cancellables for notes
     
     init() {
         readNotes()
+    }
+}
+
+// MARK: - Update Selected Note Attributes
+extension NotesViewModel {
+    func updateSelectedNoteAttributes() {
+        
     }
 }
 

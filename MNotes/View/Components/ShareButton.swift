@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ShareButton<Label: View>: View {
-//    @State private var showShare = false
+
     var items: [Any]
     let label: Label
     
@@ -26,17 +26,8 @@ struct ShareButton<Label: View>: View {
     }
     
     func shareButton() {
-//        withAnimation(.spring()) {
-//            showShare.toggle()
-//        }
-        
         let av = UIActivityViewController(activityItems: items, applicationActivities: nil)
         UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
-
-//        if UIDevice.current.userInterfaceIdiom == .pad {
-//            av.popoverPresentationController?.sourceView = UIApplication.shared.windows.first
-//            av.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2.1, y: UIScreen.main.bounds.height / 2.3, width: 300, height: 300 * 9 / 16)
-//        }
     }
 }
 

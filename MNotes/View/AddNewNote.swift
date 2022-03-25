@@ -10,14 +10,14 @@ import SwiftUI
 struct AddNewNote: View {
     @EnvironmentObject var vm: NotesViewModel
 
-    @Binding var showCategoryPicker: Bool //= false
+    @Binding var showCategoryPicker: Bool
     @State private var showButtonAnimation: Bool = false
     @State private var category: NoteCategory?
     
     var body: some View {
         VStack(spacing: 0.0) {
-            CategoryPicker(show: $showCategoryPicker, category: $category)
-                .scaleEffect(showButtonAnimation ? 1.05 : 1)
+            CategoryPicker(show: $showCategoryPicker, category: $category, transition: .bottom)
+                .scaleEffect(showButtonAnimation ? 1.1 : 1)
                 .zIndex(0)
                 .clipped()
             Button {
@@ -38,20 +38,19 @@ struct AddNewNote: View {
                     .scaleEffect(showButtonAnimation ? 1.1 : 1)
                     .background(Color(UIColor.systemIndigo))
                     .clipShape(Circle())
+                    .rotationEffect(.init(degrees: showCategoryPicker ? 45 : 0))
             }
-            .rotationEffect(.init(degrees: showCategoryPicker ? 45 : 0))
             .scaleEffect(showButtonAnimation ? 1.1 : 1)
             .zIndex(1)
         }
-        .padding(.bottom)
+        .padding()
         .transition(.move(edge: .bottom))
         .onChange(of: category) { newValue in
-            // 1. Create new Note with selected category and add to notes
-            // 2. Select Note ID
             if let newCategory = newValue {
                 let newNote = vm.createNote(note: .init(category: newCategory), at: 0)
                 print("NewNote ID: \(newNote.id)")
                 vm.selectedNoteID = newNote.id
+                category = nil
             }
         }
     }

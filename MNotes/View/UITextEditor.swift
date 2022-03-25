@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 enum CustomAttributes {
     case menlo
@@ -39,21 +40,21 @@ struct UITextEditor: UIViewRepresentable {
     
     @AppStorage("fontSize") var fontSize: Double = 13
     
+    var cancelables = Set<AnyCancellable>() // cancellables for notes
+    
     func makeUIView(context: Context) -> UITextView {
         let uiView = UITextView()
         
         uiView.delegate = context.coordinator
         
         defaultStyle(for: uiView)
-
+        
         return uiView
     }
  
     func updateUIView(_ uiView: UITextView, context: Context) {
-//        uiView.textColor = UIColor.orange
-//        UIFont.systemFont(ofSize: CGFloat(fontSize), weight: .regular)
-//        uiView.textColor = UIColor(settings.textColor)
-//        uiView.font = UIFont.systemFont(ofSize: CGFloat(fontSize), weight: .regular)
+//        uiView.textColor = UIColor(settings.fontSettings.textColor)
+//        uiView.font = UIFont.systemFont(ofSize: CGFloat(settings.fontSettings.fontSize), weight: .regular)
         uiView.attributedText = NSAttributedString(attributedString)
     }
     
@@ -67,10 +68,7 @@ struct UITextEditor: UIViewRepresentable {
         
         uiView.isUserInteractionEnabled = true
         uiView.autocapitalizationType = .sentences
-//        uiView.isSelectable = true
-        uiView.font = UIFont.systemFont(ofSize: CGFloat(fontSize), weight: .regular) // UIFont.preferredFont(forTextStyle: .headline)
-        uiView.textColor = UIColor.white
-        
+        uiView.isSelectable = true
     }
 
 }
@@ -84,6 +82,7 @@ struct UITextEditor_Previews: PreviewProvider {
     }
 }
 
+// MARK: - Coordinator
 extension UITextEditor {
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -102,20 +101,24 @@ extension UITextEditor {
             
             
             self.parent.attributedString = AttributedString(textView.attributedText)
+//            self.parent.attributedString.mergeAttributes(self.parent.settings.currentAttributes)
         }
         
-        func textViewDidBeginEditing(_ textView: UITextView) {
-            print("textViewDidBeginEditing: \(String(describing: textView.text!))")
-            self.parent.attributedString.mergeAttributes(self.parent.settings.currentAttributes)
-//            self.parent.attributedString = AttributedString(textView.attributedText)
-        }
-//        func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-//            return false
+//        func textViewDidBeginEditing(_ textView: UITextView) {
+//            print("textViewDidBeginEditing: \(String(describing: textView.text!))")
+//            self.parent.attributedString.mergeAttributes(self.parent.settings.currentAttributes)
+////            self.parent.attributedString = AttributedString(textView.attributedText)
 //        }
+        func textViewDidBeginEditing(_ textView: UITextView) {
+            print("textViewDidBeginEditing:")
+            self.parent.settings.showTextSettings = false
+            textView.textColor = UIColor(self.parent.settings.fontSettings.textColor)
+            textView.font = UIFont.systemFont(ofSize: CGFloat(self.parent.settings.fontSettings.fontSize), weight: .regular)
+        }
+
         
-         
-//        func textViewDidChangeSelection(_ textView: UITextView) {
-////            if let textView.markedTextRange
+        func textViewDidChangeSelection(_ textView: UITextView) {
+//            if let textView.markedTextRange
 //            if let textRange = textView.selectedTextRange {
 //                guard
 //                    let selectedText = textView.text(in: textRange),
@@ -123,7 +126,7 @@ extension UITextEditor {
 //                else { return }
 //                self.parent.attributedString[range].mergeAttributes(Note.getBaseAttributes())
 //            }
-//        }
+        }
 
     }
 }

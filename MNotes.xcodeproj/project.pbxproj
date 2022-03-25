@@ -12,10 +12,8 @@
 		411819A727E7399B00668067 /* NoteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411819A627E7399B00668067 /* NoteEditor.swift */; };
 		411819AB27E75B4900668067 /* AddNewNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411819AA27E75B4900668067 /* AddNewNote.swift */; };
 		411819AF27E7B6D000668067 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411819AE27E7B6D000668067 /* View.swift */; };
-		411819B127E7BA9F00668067 /* ColorTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411819B027E7BA9F00668067 /* ColorTabView.swift */; };
 		411819D527E8915700668067 /* ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411819D427E8915700668067 /* ContextMenu.swift */; };
 		411819D727E8B35300668067 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411819D627E8B35300668067 /* SettingsView.swift */; };
-		411819D927E90CBD00668067 /* AttributedStringExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411819D827E90CBD00668067 /* AttributedStringExample.swift */; };
 		411819DB27EA3E4F00668067 /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411819DA27EA3E4F00668067 /* ShareButton.swift */; };
 		417042E327E0F80800E894C0 /* MNotesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417042E227E0F80800E894C0 /* MNotesApp.swift */; };
 		417042E527E0F80800E894C0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417042E427E0F80800E894C0 /* ContentView.swift */; };
@@ -33,13 +31,14 @@
 		4170431A27E261B800E894C0 /* LocalFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4170431927E261B800E894C0 /* LocalFileManager.swift */; };
 		4170434427E33D1300E894C0 /* NoteItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4170434327E33D1300E894C0 /* NoteItemView.swift */; };
 		4170434827E3D36800E894C0 /* NotesDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4170434727E3D36800E894C0 /* NotesDataService.swift */; };
-		4170434A27E3D94300E894C0 /* CustomGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4170434927E3D94300E894C0 /* CustomGridView.swift */; };
 		4170435027E4D21200E894C0 /* TabViewNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4170434F27E4D21200E894C0 /* TabViewNotes.swift */; };
 		4170435227E6174200E894C0 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4170435127E6174200E894C0 /* Home.swift */; };
 		4170435427E6287500E894C0 /* EditorSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4170435327E6287500E894C0 /* EditorSettingsViewModel.swift */; };
 		4170435627E62CCD00E894C0 /* EditorSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4170435527E62CCD00E894C0 /* EditorSettingsView.swift */; };
 		41B4B77127EB5FAD00A61C80 /* UITextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B77027EB5FAD00A61C80 /* UITextEditor.swift */; };
 		41B4B77327EB87F700A61C80 /* AttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B77227EB87F700A61C80 /* AttributedString.swift */; };
+		41B4B7B327ED6A5D00A61C80 /* PinButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B7B227ED6A5D00A61C80 /* PinButton.swift */; };
+		41B4B7B527ED6AEA00A61C80 /* SelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B7B427ED6AEA00A61C80 /* SelectionButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,10 +47,8 @@
 		411819A627E7399B00668067 /* NoteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditor.swift; sourceTree = "<group>"; };
 		411819AA27E75B4900668067 /* AddNewNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNote.swift; sourceTree = "<group>"; };
 		411819AE27E7B6D000668067 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		411819B027E7BA9F00668067 /* ColorTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTabView.swift; sourceTree = "<group>"; };
 		411819D427E8915700668067 /* ContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenu.swift; sourceTree = "<group>"; };
 		411819D627E8B35300668067 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		411819D827E90CBD00668067 /* AttributedStringExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedStringExample.swift; sourceTree = "<group>"; };
 		411819DA27EA3E4F00668067 /* ShareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareButton.swift; sourceTree = "<group>"; };
 		417042DF27E0F80800E894C0 /* MNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		417042E227E0F80800E894C0 /* MNotesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNotesApp.swift; sourceTree = "<group>"; };
@@ -70,13 +67,14 @@
 		4170431927E261B800E894C0 /* LocalFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileManager.swift; sourceTree = "<group>"; };
 		4170434327E33D1300E894C0 /* NoteItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteItemView.swift; sourceTree = "<group>"; };
 		4170434727E3D36800E894C0 /* NotesDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesDataService.swift; sourceTree = "<group>"; };
-		4170434927E3D94300E894C0 /* CustomGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGridView.swift; sourceTree = "<group>"; };
 		4170434F27E4D21200E894C0 /* TabViewNotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewNotes.swift; sourceTree = "<group>"; };
 		4170435127E6174200E894C0 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		4170435327E6287500E894C0 /* EditorSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorSettingsViewModel.swift; sourceTree = "<group>"; };
 		4170435527E62CCD00E894C0 /* EditorSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorSettingsView.swift; sourceTree = "<group>"; };
 		41B4B77027EB5FAD00A61C80 /* UITextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextEditor.swift; sourceTree = "<group>"; };
 		41B4B77227EB87F700A61C80 /* AttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedString.swift; sourceTree = "<group>"; };
+		41B4B7B227ED6A5D00A61C80 /* PinButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinButton.swift; sourceTree = "<group>"; };
+		41B4B7B427ED6AEA00A61C80 /* SelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,15 +88,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		411819AC27E789F500668067 /* Helpers */ = {
+		411819AC27E789F500668067 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				411819DA27EA3E4F00668067 /* ShareButton.swift */,
 				411819A427E721A100668067 /* BlurView.swift */,
-				4170434927E3D94300E894C0 /* CustomGridView.swift */,
-				411819B027E7BA9F00668067 /* ColorTabView.swift */,
+				411819DA27EA3E4F00668067 /* ShareButton.swift */,
+				41B4B7B227ED6A5D00A61C80 /* PinButton.swift */,
+				41B4B7B427ED6AEA00A61C80 /* SelectionButton.swift */,
 			);
-			path = Helpers;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		411819AD27E78A8F00668067 /* Editor */ = {
@@ -154,7 +152,7 @@
 		417042F027E0F81400E894C0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				411819AC27E789F500668067 /* Helpers */,
+				411819AC27E789F500668067 /* Components */,
 				4170435127E6174200E894C0 /* Home.swift */,
 				4170430527E0F9A100E894C0 /* NotesCollection.swift */,
 				4170434327E33D1300E894C0 /* NoteItemView.swift */,
@@ -162,7 +160,6 @@
 				411819AA27E75B4900668067 /* AddNewNote.swift */,
 				4170434F27E4D21200E894C0 /* TabViewNotes.swift */,
 				411819D627E8B35300668067 /* SettingsView.swift */,
-				411819D827E90CBD00668067 /* AttributedStringExample.swift */,
 				41B4B77027EB5FAD00A61C80 /* UITextEditor.swift */,
 				411819AD27E78A8F00668067 /* Editor */,
 				411819A227E644CC00668067 /* CategoryPicker.swift */,
@@ -292,10 +289,10 @@
 				41B4B77327EB87F700A61C80 /* AttributedString.swift in Sources */,
 				4170430627E0F9A100E894C0 /* NotesCollection.swift in Sources */,
 				417042E527E0F80800E894C0 /* ContentView.swift in Sources */,
-				411819D927E90CBD00668067 /* AttributedStringExample.swift in Sources */,
 				4170431A27E261B800E894C0 /* LocalFileManager.swift in Sources */,
 				417042FD27E0F87300E894C0 /* ImageCacheManager.swift in Sources */,
 				411819A727E7399B00668067 /* NoteEditor.swift in Sources */,
+				41B4B7B327ED6A5D00A61C80 /* PinButton.swift in Sources */,
 				4170430227E0F89800E894C0 /* Note.swift in Sources */,
 				4170431227E21C7400E894C0 /* Color.swift in Sources */,
 				41B4B77127EB5FAD00A61C80 /* UITextEditor.swift in Sources */,
@@ -308,15 +305,14 @@
 				411819A327E644CC00668067 /* CategoryPicker.swift in Sources */,
 				411819AB27E75B4900668067 /* AddNewNote.swift in Sources */,
 				417042FC27E0F87300E894C0 /* ImageLoader.swift in Sources */,
+				41B4B7B527ED6AEA00A61C80 /* SelectionButton.swift in Sources */,
 				4170431427E22C8400E894C0 /* FontFromatView.swift in Sources */,
 				411819A527E721A100668067 /* BlurView.swift in Sources */,
-				411819B127E7BA9F00668067 /* ColorTabView.swift in Sources */,
 				417042E327E0F80800E894C0 /* MNotesApp.swift in Sources */,
 				411819D727E8B35300668067 /* SettingsView.swift in Sources */,
 				4170430E27E1ED9100E894C0 /* Date.swift in Sources */,
 				4170434827E3D36800E894C0 /* NotesDataService.swift in Sources */,
 				411819DB27EA3E4F00668067 /* ShareButton.swift in Sources */,
-				4170434A27E3D94300E894C0 /* CustomGridView.swift in Sources */,
 				411819D527E8915700668067 /* ContextMenu.swift in Sources */,
 				4170435627E62CCD00E894C0 /* EditorSettingsView.swift in Sources */,
 			);

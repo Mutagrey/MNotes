@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Combine
 
 enum FontFormatSetting: String {
     case bold
@@ -33,42 +33,36 @@ enum FontFormatSetting: String {
     }
 }
 
+struct FontSettings {
+    var isBold: Bool = false
+    var isItalic: Bool = false
+    var isUnderline: Bool = false
+    var isStrikethrough: Bool = false
+    var isShadow: Bool = false
+    var textColor: Color = Color.white
+    var fontSize: Double = 14
+}
+
 class EditorSettingsViewModel: ObservableObject {
     
-    @Published var showEditorSettings: Bool = false
+    @Published var showTextSettings: Bool = false
     
-//    @Published var selectedSetting: EditorSettings = .text
-
-    @Published var isBold: Bool = false
-    @Published var isItalic: Bool = false
-    @Published var isUnderline: Bool = false
-    @Published var isStrikethrough: Bool = false
-    @Published var isShadow: Bool = false
+    @Published var fontSettings: FontSettings = .init()
+    @Published var currentAttributes: AttributeContainer = AttributeContainer()
+    private var cancelables = Set<AnyCancellable>() // cancellables
     
-    @Published var textColor: Color = Color.white
-//    @Published var font: UIFont = UIFont.systemFont(ofSize: 35, weight: .regular)
-    @Published var fontSize: Double = 14
-    
-    
-    @Published var attrString: AttributedString = AttributedString("asdasdasd")//, attributes: currentAttributes)
-    
-    var currentAttributes: AttributeContainer {
-        var attr = AttributeContainer()
-        
-//        var attributedString = AttributedString("The first month of your subscription is free.")
-//        let range = attributedString.range(of: "free")!
-//        attributedString[range].mergeAttributes(<#T##attributes: AttributeContainer##AttributeContainer#>)
-//        attributedString[range].foregroundColor = .green
-        
-        attr.foregroundColor = UIColor(textColor)
-        attr.font = UIFont.systemFont(ofSize: fontSize, weight: .regular)
-        
-        return attr
+    init() {
+        onChangeAttributes()
     }
     
-    func addCurrentAttributesToString(for range: Range<AttributedString.Index>?) {
-        if let range = range {
-            
-        }
+    func onChangeAttributes() {
+        $fontSettings
+            .sink { [weak self] (settings) in
+                guard let self = self else { return }
+                self.currentAttributes.foregroundColor = UIColor(settings.textColor)
+                self.currentAttributes.font = UIFont.systemFont(ofSize: settings.fontSize, weight: .regular)
+//                self.attrString.mergeAttributes(self.currentAttributes)
+            }
+            .store(in: &cancelables)
     }
 }

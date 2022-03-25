@@ -12,15 +12,15 @@ struct SettingsView: View {
     @AppStorage("padding") var padding: Double = 3
     @AppStorage("cornerRadius") var cornerRadius: Double = 12
     @AppStorage("columns") var columns: Int = 2
-    @AppStorage("sortBy") var sortBy: SortBy = .category
+//    @AppStorage("sortBy") var sortBy: SortBy = .category
     
-    @AppStorage("fontSize") var fontSize: Double = 13
+//    @AppStorage("fontSize") var fontSize: Double = 13
     
     var body: some View {
         NavigationView {
             Form {
                 mainSettings
-                fontSettings
+//                fontSettings
             }
             .navigationBarTitle(Text("Settings"), displayMode: .inline)
             .toolbar {
@@ -75,30 +75,30 @@ extension SettingsView {
                 }
             }
             
-            Picker("SortBy", selection: $sortBy) {
-                ForEach(SortBy.allCases, id: \.self) { sortBy in
-                    Text("\(sortBy.rawValue.capitalized)").tag(sortBy)
-                }
-            }
+//            Picker("SortBy", selection: $sortBy) {
+//                ForEach(SortBy.allCases, id: \.self) { sortBy in
+//                    Text("\(sortBy.rawValue.capitalized)").tag(sortBy)
+//                }
+//            }
 
         }
     }
     
-    @ViewBuilder
-    private var fontSettings: some View {
-        Section(header: Text("Font settings")) {
-            
-            VStack {
-                Slider(value: $fontSize, in: 8...16, step: 1)
-                HStack {
-                    Text("Font size")
-                    Spacer()
-                    Text("\(fontSize, specifier: "%.0f")")
-                }
-            }
-
-        }
-    }
+//    @ViewBuilder
+//    private var fontSettings: some View {
+//        Section(header: Text("Font settings")) {
+//            
+//            VStack {
+//                Slider(value: $fontSize, in: 8...16, step: 1)
+//                HStack {
+//                    Text("Font size")
+//                    Spacer()
+//                    Text("\(fontSize, specifier: "%.0f")")
+//                }
+//            }
+//
+//        }
+//    }
     
     
 }

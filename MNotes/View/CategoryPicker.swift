@@ -18,12 +18,14 @@ struct CategoryPicker: View {
     @Binding var category: NoteCategory?
     let size: CGFloat
     let position: CategoryPosition
+    let transition: Edge
     
-    init(show: Binding<Bool>, category: Binding<NoteCategory?>, size: CGFloat = 25, position: CategoryPosition = .vertical) {
+    init(show: Binding<Bool>, category: Binding<NoteCategory?>, size: CGFloat = 25, position: CategoryPosition = .vertical, transition: Edge = .top) {
         self._show = show
         self._category = category
         self.size = size
         self.position = position
+        self.transition = transition
     }
     var body: some View {
         ZStack{
@@ -34,7 +36,8 @@ struct CategoryPicker: View {
                             content
                         }
 //                    }
-                    .transition(.move(edge: .top))
+                    .transition(.move(edge: transition))
+
                 }
             } else {
                 if show {
