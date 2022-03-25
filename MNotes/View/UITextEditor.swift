@@ -8,40 +8,11 @@
 import SwiftUI
 import Combine
 
-enum CustomAttributes {
-    case menlo
-    case times
-    case important
-    case `default`
-    
-    var attributeContainer: AttributeContainer {
-        var container = AttributeContainer()
-        switch self {
-        case .menlo:
-            container.font = .custom("Menlo", size: 30, relativeTo: .body)
-            container.foregroundColor = .indigo
-        case .times:
-            container.font = .custom("Times New Roman", size: 17, relativeTo: .body)
-            container.foregroundColor = UIColor.blue
-        case .important:
-            container.font = .custom("Courier New", size: 17, relativeTo: .body)
-            container.backgroundColor = .yellow
-        default:
-            break
-        }
-        return container
-    }
-}
-
 struct UITextEditor: UIViewRepresentable {
     @EnvironmentObject var settings: EditorSettingsViewModel
     
     @Binding var attributedString: AttributedString
-    
-    @AppStorage("fontSize") var fontSize: Double = 13
-    
-    var cancelables = Set<AnyCancellable>() // cancellables for notes
-    
+            
     func makeUIView(context: Context) -> UITextView {
         let uiView = UITextView()
         
@@ -53,8 +24,8 @@ struct UITextEditor: UIViewRepresentable {
     }
  
     func updateUIView(_ uiView: UITextView, context: Context) {
-//        uiView.textColor = UIColor(settings.fontSettings.textColor)
-//        uiView.font = UIFont.systemFont(ofSize: CGFloat(settings.fontSettings.fontSize), weight: .regular)
+        
+        
         uiView.attributedText = NSAttributedString(attributedString)
     }
     
@@ -97,35 +68,70 @@ extension UITextEditor {
         }
      
         func textViewDidChange(_ textView: UITextView) {
-            print("textViewDidChange: \(String(describing: textView.text!))")
-            
-            
             self.parent.attributedString = AttributedString(textView.attributedText)
-//            self.parent.attributedString.mergeAttributes(self.parent.settings.currentAttributes)
         }
         
-//        func textViewDidBeginEditing(_ textView: UITextView) {
-//            print("textViewDidBeginEditing: \(String(describing: textView.text!))")
-//            self.parent.attributedString.mergeAttributes(self.parent.settings.currentAttributes)
-////            self.parent.attributedString = AttributedString(textView.attributedText)
-//        }
         func textViewDidBeginEditing(_ textView: UITextView) {
-            print("textViewDidBeginEditing:")
             self.parent.settings.showTextSettings = false
-            textView.textColor = UIColor(self.parent.settings.fontSettings.textColor)
-            textView.font = UIFont.systemFont(ofSize: CGFloat(self.parent.settings.fontSettings.fontSize), weight: .regular)
         }
 
+        func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+            textView.typingAttributes = [
+                .foregroundColor: UIColor(self.parent.settings.fontSettings.textColor),
+                .font: getUIFont(),
+                .strikethroughStyle: self.parent.settings.fontSettings.isStrikethrough,
+                .underlineStyle: self.parent.settings.fontSettings.isUnderline,
+                .shadow: makeShadowFont()
+            ]
+            return true
+        }
+        
         
         func textViewDidChangeSelection(_ textView: UITextView) {
-//            if let textView.markedTextRange
-//            if let textRange = textView.selectedTextRange {
-//                guard
-//                    let selectedText = textView.text(in: textRange),
-//                    let range = self.parent.attributedString.range(of: selectedText)
-//                else { return }
-//                self.parent.attributedString[range].mergeAttributes(Note.getBaseAttributes())
+            if !(textView.selectedTextRange?.isEmpty ?? true) {
+                self.parent.settings.showApplyCurrentAttributesButton = true
+            } else {
+                self.parent.settings.showApplyCurrentAttributesButton = false
+            }
+            
+//            if  self.parent.settings.applyCurrentAttributes {
+//                if let textRange = textView.selectedTextRange {
+//                    guard
+//                        let selectedText = textView.text(in: textRange),
+//                        let range = self.parent.attributedString.range(of: selectedText)
+//                    else { return }
+//                    self.parent.attributedString[range].mergeAttributes(self.parent.settings.currentAttributes)
+//                    self.parent.settings.applyCurrentAttributes = false
+//                }
 //            }
+        }
+        
+        func getUIFont() -> UIFont {
+            
+            if self.parent.settings.fontSettings.isBold && !self.parent.settings.fontSettings.isItalic {
+                return UIFont.systemFont(ofSize: CGFloat(self.parent.settings.fontSettings.fontSize), weight: .regular).bold
+            }
+            
+            if !self.parent.settings.fontSettings.isBold && self.parent.settings.fontSettings.isItalic {
+                return UIFont.systemFont(ofSize: CGFloat(self.parent.settings.fontSettings.fontSize), weight: .regular).italic
+            }
+            
+            if self.parent.settings.fontSettings.isBold && self.parent.settings.fontSettings.isItalic {
+                return UIFont.systemFont(ofSize: CGFloat(self.parent.settings.fontSettings.fontSize), weight: .regular).boldItalic
+            }
+            
+            return UIFont.systemFont(ofSize: CGFloat(self.parent.settings.fontSettings.fontSize), weight: .regular)
+
+        }
+        
+        func makeShadowFont() -> NSShadow {
+            let attributedStringShadow = NSShadow()
+            if self.parent.settings.fontSettings.isShadow {
+                attributedStringShadow.shadowOffset = CGSize(width: 5, height: 5)
+                attributedStringShadow.shadowBlurRadius = 5.0
+                attributedStringShadow.shadowColor = UIColor(self.parent.settings.fontSettings.textColor.opacity(0.5))
+            }
+            return attributedStringShadow
         }
 
     }

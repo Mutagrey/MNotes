@@ -12,24 +12,26 @@ struct EditorSettingsView: View {
     
     var body: some View {
         if settings.showTextSettings {
-            VStack(spacing: 0.0) {
+            VStack(spacing: 15.0) {
                 HStack {
                     titleSetting(title: "Text")
                     Spacer()
+//                    if settings.showApplyCurrentAttributesButton {
+//                        Button("Apply") {
+//                            settings.applyCurrentAttributes = true
+//                        }
+//                    }
+//                    Spacer()
                     closeButton
                 }
-                .onTapGesture {
-                    settings.showTextSettings.toggle()
-                }
+                .padding(.horizontal)
+                .padding(.vertical, 6)
                 FontFromatView()
-//                    .padding(.horizontal)
+//                    .padding()
+                Divider()
             }
             .padding(.bottom)
-//            .frame(height: 200)
-            .background(
-                Color(UIColor.quaternarySystemFill)
-            )
-
+            .background(Color(UIColor.secondarySystemBackground))
         }
     }
 }
@@ -49,17 +51,15 @@ extension EditorSettingsView {
             Image(systemName: "xmark")
                 .padding()
                 .foregroundColor(Color.secondary)
-                .background(Color(UIColor.secondarySystemBackground))
+                .background(Color(UIColor.secondarySystemFill))
                 .clipShape(Circle())
         }
-        .padding()
     }
     // Title
     private func titleSetting(title: String) -> some View {
         Text("\(title.capitalized)")
             .font(.title2)
             .fontWeight(.bold)
-            .padding()
     }
     
 }

@@ -26,9 +26,8 @@ struct NoteEditor: View {
 //        if let currentID = vm.notes.firstIndex(where: { $0.id == selectedNoteID } ) {
             VStack(spacing: 0){
                 UITextEditor(attributedString: $note.attributedText)
-                    .padding(.horizontal)
                     .focused($dismiss)
-                    .padding(.top)
+                    .padding()
                 Spacer(minLength: 0)
                 EditorSettingsView()
                     .ignoresSafeArea()
@@ -115,25 +114,17 @@ extension NoteEditor {
             CustomEditBarButton(systemIconName: "chevron.left", title: nil) {
                 presentationMode.wrappedValue.dismiss()
             }
-            
             Group {
                 CustomEditBarButton(systemIconName: "textformat.alt", title: nil) {
                     settings.showTextSettings.toggle()
                     dismiss = false
                 }
-                
-//                CustomEditBarButton(systemIconName: "camera", title: nil) {
-//
-//                }
-//                CustomEditorButton(systemIconName: "pencil.tip.crop.circle") {
-//
-//                }
                 CustomEditBarButton(systemIconName: "trash", title: nil) {
                     deletionAlert.toggle()
                 }
                 .alert(isPresented: $deletionAlert) {
                     Alert(title: Text("Confirm Deletion"),
-                        message: Text("Are you sure you want to delete?"),
+                        message: Text("Are you sure you want to clean all text?"),
                         primaryButton: .destructive(Text("Delete")) {
                         note.attributedText = ""
                         },
@@ -148,12 +139,8 @@ extension NoteEditor {
                     .padding()
             }
             .frame(maxWidth: .infinity)
-//            CustomEditBarButton(systemIconName: "", title: (dismiss ? "Done" : "Edit")) {
-//                dismiss.toggle()
-//            }
         }
-//        .padding(.horizontal)
-//        .background(Color(UIColor.secondarySystemBackground).opacity(0.7).ignoresSafeArea(.container, edges: .bottom))
+
     }
 }
 

@@ -78,7 +78,7 @@ struct Note: Identifiable, Codable, Hashable {
     static func defaultAttributes() -> AttributeContainer {
         var attr = AttributeContainer()
         attr.foregroundColor = UIColor.white
-        attr.font = UIFont.systemFont(ofSize: 14, weight: .regular) //.system(size: 20, weight: .regular, design: .rounded)
+        attr.font = UIFont.systemFont(ofSize: 20, weight: .regular) //.system(size: 20, weight: .regular, design: .rounded)
         return attr
     }
     

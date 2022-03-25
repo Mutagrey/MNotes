@@ -39,7 +39,7 @@ class NotesDataService {
             // Load additional data
             if folders.count == 0 {
                 self.notes.append(self.getInfoNote())
-                self.dummyText() // ! DUMMMY TEXT : REMOVE IT IN PRODUCTION !
+//                self.dummyText() // ! DUMMMY TEXT : REMOVE IT IN PRODUCTION !
                 self.notes.forEach({ self.saveNote(note: $0) })
             }
             
@@ -86,15 +86,14 @@ extension NotesDataService {
     /// Add First Info Note
     func getInfoNote() -> Note {
         var infoNote = Note()
-//        var attr = AttributeContainer()
-//        attr.foregroundColor = .orange
         infoNote.attributedText = AttributedString("""
-                This is the Note Info \
-                Tap to Edit this Note \
+                This is the Note Info \r
+                Tap to Edit this Note \r
                 Features: \n
-                - Edit Your note. \
-                - Change font, alignment and add some images. \
-                - Pin your Note \
+                - Edit note \r
+                - Change font style \r
+                - Change text color \r
+                - Pin note \r
                 - Choose color category for your Note
                 """, attributes: Note.defaultAttributes())
         infoNote.attributedText.foregroundColor = UIColor.systemOrange
