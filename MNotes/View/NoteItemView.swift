@@ -15,7 +15,6 @@ struct NoteItemView: View {
     let categorySize: CGFloat
     
     @AppStorage("cornerRadius") var cornerRadius: Double = 12
-//    @AppStorage("fontSize") var fontSize: Double = 13
     
     @State private var showCategoryPicker: Bool = false
     @State private var category: NoteCategory?
@@ -34,11 +33,12 @@ struct NoteItemView: View {
             CategoryPickerSelector(show: $showCategoryPicker, category: $note.category, size: categorySize, categoryPosition: categoryPosition)
                 .zIndex(1)
         }
+        .onChange(of: note.category) { newValue in
+            print("\(newValue?.rawValue ?? "ff")")
+            vm.updateNote(note: note)
+        }
         .contextMenu { ContextMenu(note: $note) }
-//        .onChange(of: note.category) { newValue in
-//            print("\(newValue?.rawValue ?? "ff")")
-//            vm.updateNote(note: note)
-//        }
+
 
     }
     
@@ -69,8 +69,6 @@ struct NoteItemView_Previews: PreviewProvider {
                  .lineLimit(2)
              ScrollView(.vertical, showsIndicators: true) {
                  Text(note.attributedText)
-//                     .font(.system(size: fontSize, weight: .regular))
-//                     .foregroundColor(Color.primary)
                      .multilineTextAlignment(.leading)
              }
              Spacer(minLength: 0)

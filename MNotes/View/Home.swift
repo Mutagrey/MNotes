@@ -12,9 +12,7 @@ struct Home: View {
     
     @State private var showCategoryPicker: Bool = false
     @State private var showSettings: Bool = false
-    @AppStorage("sortBy") var sortBy: SortBy = .category
-//    @State private var deletionAlert: Bool = false
-    
+
     var body: some View {
         NavigationView {
             NotesCollection()
@@ -42,7 +40,6 @@ struct Home: View {
         .sheet(isPresented: $showSettings) {
             SettingsView()
         }
-//        .overlay(Text("\(vm.selectedNoteID ?? "empty")"))
     }
 }
 
@@ -72,14 +69,9 @@ extension Home {
                     .transition(.move(edge: .trailing))
             } else {
                 if !showCategoryPicker {
-//                    sortByMenu
-//                        .transition(.move(edge: .leading))
-//                    Spacer()
                     notesCount
                         .opacity(vm.isEditable ? 0 : 1)
                         .transition(.scale)
-//                    Spacer()
-//                    Button("") {}
                 }
             }
         }
@@ -168,53 +160,5 @@ extension Home {
                 .font(.subheadline.bold())
                 .foregroundColor(.primary)
         }
-    }
-}
-
-// MARK: - Menu SortBy
-
-enum SortBy: String, CaseIterable {
-    case date
-    case category
-    
-    var iconName: String {
-        switch self {
-        case .date:
-            return "calendar"
-        case .category:
-            return "bookmark"
-        }
-//        paperclip
-    }
-}
-
-extension Home {
-    
-    private var sortByMenu: some View {
-//        Menu {
-        HStack{
-            if !showCategoryPicker {
-                Picker(selection: $sortBy) {
-                    ForEach(SortBy.allCases, id: \.self) { sortBy in
-                        Button {
-                            self.sortBy = sortBy
-                            print(sortBy)
-                        } label: {
-                            Label("\(sortBy.rawValue.capitalized)", systemImage: sortBy.iconName)
-                                .padding()
-                                .font(.caption2)
-                        }
-                    }
-                } label: {
-                    Image(systemName: "arrow.up.arrow.down")
-//                        .font(.caption2)
-                }
-                
-                .pickerStyle(MenuPickerStyle())
-                .transition(.move(edge: .leading))
-            }
-        }
-        .opacity(showCategoryPicker ? 0 : 1)
-
     }
 }

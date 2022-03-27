@@ -24,9 +24,8 @@ struct UITextEditor: UIViewRepresentable {
     }
  
     func updateUIView(_ uiView: UITextView, context: Context) {
-        
-        
         uiView.attributedText = NSAttributedString(attributedString)
+        print("Updated")
     }
     
     private func defaultStyle(for uiView: UITextView) {
@@ -40,6 +39,7 @@ struct UITextEditor: UIViewRepresentable {
         uiView.isUserInteractionEnabled = true
         uiView.autocapitalizationType = .sentences
         uiView.isSelectable = true
+        
     }
 
 }
@@ -69,19 +69,22 @@ extension UITextEditor {
      
         func textViewDidChange(_ textView: UITextView) {
             self.parent.attributedString = AttributedString(textView.attributedText)
+            print("Changed")
         }
         
         func textViewDidBeginEditing(_ textView: UITextView) {
-            self.parent.settings.showTextSettings = false
+            DispatchQueue.main.async {
+                if self.parent.settings.showTextSettings { self.parent.settings.showTextSettings = false } 
+            }
         }
 
         func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
             textView.typingAttributes = [
                 .foregroundColor: UIColor(self.parent.settings.fontSettings.textColor),
-                .font: getUIFont(),
+                .font: self.parent.settings.getUIFont(),
                 .strikethroughStyle: self.parent.settings.fontSettings.isStrikethrough,
                 .underlineStyle: self.parent.settings.fontSettings.isUnderline,
-                .shadow: makeShadowFont()
+                .shadow: self.parent.settings.makeShadowFont()
             ]
             return true
         }
@@ -104,34 +107,6 @@ extension UITextEditor {
 //                    self.parent.settings.applyCurrentAttributes = false
 //                }
 //            }
-        }
-        
-        func getUIFont() -> UIFont {
-            
-            if self.parent.settings.fontSettings.isBold && !self.parent.settings.fontSettings.isItalic {
-                return UIFont.systemFont(ofSize: CGFloat(self.parent.settings.fontSettings.fontSize), weight: .regular).bold
-            }
-            
-            if !self.parent.settings.fontSettings.isBold && self.parent.settings.fontSettings.isItalic {
-                return UIFont.systemFont(ofSize: CGFloat(self.parent.settings.fontSettings.fontSize), weight: .regular).italic
-            }
-            
-            if self.parent.settings.fontSettings.isBold && self.parent.settings.fontSettings.isItalic {
-                return UIFont.systemFont(ofSize: CGFloat(self.parent.settings.fontSettings.fontSize), weight: .regular).boldItalic
-            }
-            
-            return UIFont.systemFont(ofSize: CGFloat(self.parent.settings.fontSettings.fontSize), weight: .regular)
-
-        }
-        
-        func makeShadowFont() -> NSShadow {
-            let attributedStringShadow = NSShadow()
-            if self.parent.settings.fontSettings.isShadow {
-                attributedStringShadow.shadowOffset = CGSize(width: 5, height: 5)
-                attributedStringShadow.shadowBlurRadius = 5.0
-                attributedStringShadow.shadowColor = UIColor(self.parent.settings.fontSettings.textColor.opacity(0.5))
-            }
-            return attributedStringShadow
         }
 
     }

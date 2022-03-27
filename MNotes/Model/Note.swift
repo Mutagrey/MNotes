@@ -48,7 +48,9 @@ struct Note: Identifiable, Codable, Hashable {
     var subtitle: AttributedString { getSubtitle(attributedText) }
     var wordsCount: Int { attributedText.characters.split { $0 == " " || $0.isNewline }.count }
     var baseTextAttributes: AttributeContainer { Note.defaultAttributes() }
-
+    var runsCount: Int { attributedText.runs.count }
+    
+    
     enum CodingKeys: String, CodingKey {
         case id
         case date
@@ -59,7 +61,6 @@ struct Note: Identifiable, Codable, Hashable {
     
     // MARK: - Methods
     private func getTitle(_ aText: AttributedString) -> String {
-        
         let strMass = aText.characters.split(separator: "\n")
         if strMass.count > 0 {
             return (String(strMass[0]))
@@ -78,7 +79,7 @@ struct Note: Identifiable, Codable, Hashable {
     static func defaultAttributes() -> AttributeContainer {
         var attr = AttributeContainer()
         attr.foregroundColor = UIColor.white
-        attr.font = UIFont.systemFont(ofSize: 20, weight: .regular) //.system(size: 20, weight: .regular, design: .rounded)
+        attr.font = UIFont.systemFont(ofSize: 18, weight: .regular) //.system(size: 20, weight: .regular, design: .rounded)
         return attr
     }
     

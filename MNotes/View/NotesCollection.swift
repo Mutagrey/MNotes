@@ -49,26 +49,24 @@ struct NotesList_Previews: PreviewProvider {
 extension NotesCollection {
     /// Row Element View
     private func content(category: NoteCategory) -> some View {
-        ForEach(vm.notes.filter({$0.category == category})) { note in
-            if let noteID = vm.notes.firstIndex(where: {$0.id == note.id}) {
-                Group{
-                    if vm.isEditable {
-                        NoteItemView(note: $vm.notes[noteID], categoryPosition: .vertical)
-                            .onTapGesture {
-                                vm.toggleSelected(note: note)
-                            }
-                    } else {
-                        NavigationLink(tag: vm.notes[noteID].id, selection: $vm.selectedNoteID) {
-                            NoteEditor(selectedNoteID: $vm.selectedNoteID)
-                        } label: {
-                            NoteItemView(note: $vm.notes[noteID], categoryPosition: .vertical)
+        
+        ForEach($vm.notes.filter({$0.category.wrappedValue == category})) { $note in
+            Group{
+                if vm.isEditable {
+                    NoteItemView(note: $note, categoryPosition: .vertical)
+                        .onTapGesture {
+                            vm.toggleSelected(note: note)
                         }
-
+                } else {
+                    NavigationLink(tag: note.id, selection: $vm.selectedNoteID) {
+                        NoteEditor(selectedNoteID: $vm.selectedNoteID)
+                    } label: {
+                        NoteItemView(note: $note, categoryPosition: .vertical)
                     }
                 }
-                .matchedGeometryEffect(id: note.id, in: animation) 
-                .padding(.vertical, padding)
             }
+            .matchedGeometryEffect(id: note.id, in: animation)
+            .padding(.vertical, padding)
         }
     }
 }

@@ -14,13 +14,10 @@ struct SettingsView: View {
     @AppStorage("columns") var columns: Int = 2
 //    @AppStorage("sortBy") var sortBy: SortBy = .category
     
-//    @AppStorage("fontSize") var fontSize: Double = 13
-    
     var body: some View {
         NavigationView {
             Form {
                 mainSettings
-//                fontSettings
             }
             .navigationBarTitle(Text("Settings"), displayMode: .inline)
             .toolbar {
@@ -83,22 +80,5 @@ extension SettingsView {
 
         }
     }
-    
-//    @ViewBuilder
-//    private var fontSettings: some View {
-//        Section(header: Text("Font settings")) {
-//            
-//            VStack {
-//                Slider(value: $fontSize, in: 8...16, step: 1)
-//                HStack {
-//                    Text("Font size")
-//                    Spacer()
-//                    Text("\(fontSize, specifier: "%.0f")")
-//                }
-//            }
-//
-//        }
-//    }
-    
     
 }
