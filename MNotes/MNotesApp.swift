@@ -12,9 +12,6 @@ struct MNotesApp: App {
     @StateObject var vm = NotesViewModel()
     @StateObject var editSettings = EditorSettingsViewModel()
     
-//    init() {
-//        UINavigationBar.appearance().items?.append()
-//    }
     var body: some Scene {
         WindowGroup {
             ContentView()

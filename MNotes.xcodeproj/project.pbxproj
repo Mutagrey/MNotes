@@ -36,6 +36,8 @@
 		41B4B7B527ED6AEA00A61C80 /* SelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B7B427ED6AEA00A61C80 /* SelectionButton.swift */; };
 		41B4B7B727ED8B2F00A61C80 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B7B627ED8B2F00A61C80 /* UIFont.swift */; };
 		41B4B7B927EF2D5C00A61C80 /* NoteEditor+EditBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B7B827EF2D5C00A61C80 /* NoteEditor+EditBar.swift */; };
+		41B4B7BD27F198D600A61C80 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B7BC27F198D600A61C80 /* NSAttributedString.swift */; };
+		41B4B7BF27F1E48400A61C80 /* UITextEditor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B7BE27F1E48400A61C80 /* UITextEditor2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,8 @@
 		41B4B7B427ED6AEA00A61C80 /* SelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionButton.swift; sourceTree = "<group>"; };
 		41B4B7B627ED8B2F00A61C80 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		41B4B7B827EF2D5C00A61C80 /* NoteEditor+EditBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteEditor+EditBar.swift"; sourceTree = "<group>"; };
+		41B4B7BC27F198D600A61C80 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
+		41B4B7BE27F1E48400A61C80 /* UITextEditor2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextEditor2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,7 @@
 				41B4B7B827EF2D5C00A61C80 /* NoteEditor+EditBar.swift */,
 				4170431327E22C8400E894C0 /* FontFromatView.swift */,
 				41B4B77027EB5FAD00A61C80 /* UITextEditor.swift */,
+				41B4B7BE27F1E48400A61C80 /* UITextEditor2.swift */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 				411819AE27E7B6D000668067 /* View.swift */,
 				4170430D27E1ED9100E894C0 /* Date.swift */,
 				41B4B7B627ED8B2F00A61C80 /* UIFont.swift */,
+				41B4B7BC27F198D600A61C80 /* NSAttributedString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -275,7 +281,9 @@
 				41B4B7B327ED6A5D00A61C80 /* PinButton.swift in Sources */,
 				41B4B7B927EF2D5C00A61C80 /* NoteEditor+EditBar.swift in Sources */,
 				4170430227E0F89800E894C0 /* Note.swift in Sources */,
+				41B4B7BD27F198D600A61C80 /* NSAttributedString.swift in Sources */,
 				41B4B7B727ED8B2F00A61C80 /* UIFont.swift in Sources */,
+				41B4B7BF27F1E48400A61C80 /* UITextEditor2.swift in Sources */,
 				4170431227E21C7400E894C0 /* Color.swift in Sources */,
 				41B4B77127EB5FAD00A61C80 /* UITextEditor.swift in Sources */,
 				411819AF27E7B6D000668067 /* View.swift in Sources */,

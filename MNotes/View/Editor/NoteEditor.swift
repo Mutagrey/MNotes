@@ -76,6 +76,8 @@ struct NoteEditor_Previews: PreviewProvider {
 extension NoteEditor {
     func topToolBar(note: Note) -> some View {
         HStack {
+            Text("\(note.runsCount) runs")
+                .font(.subheadline)
             VStack(alignment: .trailing, spacing: 6){
                 Text("\(note.wordsCount) words")
                     .font(.subheadline)

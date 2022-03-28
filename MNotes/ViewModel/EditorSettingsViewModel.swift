@@ -49,8 +49,11 @@ class EditorSettingsViewModel: ObservableObject {
     @Published var showApplyCurrentAttributesButton: Bool = false
     @Published var applyCurrentAttributes: Bool = false
     
+    @Published var selectedText: String = ""
+
     @Published var fontSettings: FontSettings = .init()
     @Published var currentAttributes: AttributeContainer = AttributeContainer()
+    
     private var cancelables = Set<AnyCancellable>() // cancellables
     
     init() {
@@ -79,21 +82,16 @@ class EditorSettingsViewModel: ObservableObject {
     }
     
     func getUIFont() -> UIFont {
-        
         if fontSettings.isBold && !fontSettings.isItalic {
             return UIFont.systemFont(ofSize: CGFloat(fontSettings.fontSize), weight: .regular).bold
         }
-        
         if !fontSettings.isBold && fontSettings.isItalic {
             return UIFont.systemFont(ofSize: CGFloat(fontSettings.fontSize), weight: .regular).italic
         }
-        
         if fontSettings.isBold && fontSettings.isItalic {
             return UIFont.systemFont(ofSize: CGFloat(fontSettings.fontSize), weight: .regular).boldItalic
         }
-        
         return UIFont.systemFont(ofSize: CGFloat(fontSettings.fontSize), weight: .regular)
-
     }
     
     func makeShadowFont() -> NSShadow {
@@ -105,4 +103,5 @@ class EditorSettingsViewModel: ObservableObject {
         }
         return attributedStringShadow
     }
+    
 }

@@ -12,20 +12,30 @@ struct UITextEditor: UIViewRepresentable {
     @EnvironmentObject var settings: EditorSettingsViewModel
     
     @Binding var attributedString: AttributedString
-            
+        
+    private var currentAttributes: [NSAttributedString.Key : Any] {
+        [
+            .foregroundColor: UIColor(self.settings.fontSettings.textColor),
+            .font: self.settings.getUIFont(),
+            .strikethroughStyle: self.settings.fontSettings.isStrikethrough,
+            .underlineStyle: self.settings.fontSettings.isUnderline,
+            .shadow: self.settings.makeShadowFont()
+        ]
+    }
+    
     func makeUIView(context: Context) -> UITextView {
         let uiView = UITextView()
         
         uiView.delegate = context.coordinator
         
         defaultStyle(for: uiView)
-        
+
         return uiView
     }
  
     func updateUIView(_ uiView: UITextView, context: Context) {
-        uiView.attributedText = NSAttributedString(attributedString)
-        print("Updated")
+        uiView.attributedText = NSMutableAttributedString(attributedString)
+//        updateSelectedText(for: uiView)
     }
     
     private func defaultStyle(for uiView: UITextView) {
@@ -33,15 +43,21 @@ struct UITextEditor: UIViewRepresentable {
         uiView.textContainerInset = .zero
         uiView.isEditable = true
         uiView.isScrollEnabled = true
-//        uiView.textContainer.lineFragmentPadding = 0
         uiView.allowsEditingTextAttributes = true
-        
-        uiView.isUserInteractionEnabled = true
-        uiView.autocapitalizationType = .sentences
-        uiView.isSelectable = true
-        
+//        uiView.adjustsFontForContentSizeCategory = true
     }
 
+    func updateSelectedText(for uiView: UITextView) {
+        if settings.applyCurrentAttributes {
+            guard let text = uiView.attributedText?.mutableCopy() as? NSMutableAttributedString else { return }
+//            guard let attributes = try? Dictionary(currentAttributes, including: \.uiKit) else { return }
+            text.addAttributes(currentAttributes, range: uiView.selectedRange)
+            uiView.attributedText = text.copy() as? NSMutableAttributedString
+            settings.applyCurrentAttributes = false
+//        } else {
+//            uiView.attributedText = NSAttributedString(attributedString)
+        }
+    }
 }
 
 struct UITextEditor_Previews: PreviewProvider {
@@ -49,7 +65,6 @@ struct UITextEditor_Previews: PreviewProvider {
         NavigationView {
             UITextEditor(attributedString: .constant(.init("***BBSdSD ***")))
         }
-        
     }
 }
 
@@ -62,52 +77,43 @@ extension UITextEditor {
     class Coordinator: NSObject, UITextViewDelegate {
         
         var parent: UITextEditor
+//        var documentBinding : Binding<NSMutableAttributedString>
+        
         
         init(_ textView: UITextEditor) {
             self.parent = textView
         }
      
         func textViewDidChange(_ textView: UITextView) {
-            self.parent.attributedString = AttributedString(textView.attributedText)
-            print("Changed")
+            self.parent.attributedString = AttributedString(NSMutableAttributedString(attributedString: textView.attributedText))
         }
         
         func textViewDidBeginEditing(_ textView: UITextView) {
-            DispatchQueue.main.async {
-                if self.parent.settings.showTextSettings { self.parent.settings.showTextSettings = false } 
-            }
+            if self.parent.settings.showTextSettings { self.parent.settings.showTextSettings = false }
+            self.parent.attributedString = AttributedString(NSMutableAttributedString(attributedString: textView.attributedText))
         }
 
+        func textViewDidEndEditing(_ textView: UITextView) {
+            self.parent.attributedString = AttributedString(NSMutableAttributedString(attributedString: textView.attributedText))
+        }
+        
         func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-            textView.typingAttributes = [
-                .foregroundColor: UIColor(self.parent.settings.fontSettings.textColor),
-                .font: self.parent.settings.getUIFont(),
-                .strikethroughStyle: self.parent.settings.fontSettings.isStrikethrough,
-                .underlineStyle: self.parent.settings.fontSettings.isUnderline,
-                .shadow: self.parent.settings.makeShadowFont()
-            ]
+            textView.typingAttributes = self.parent.currentAttributes
             return true
         }
         
         
         func textViewDidChangeSelection(_ textView: UITextView) {
+            if let textRange = textView.selectedTextRange, let selectedText = textView.text(in: textRange) {
+                self.parent.settings.selectedText = selectedText
+            }
+            
             if !(textView.selectedTextRange?.isEmpty ?? true) {
                 self.parent.settings.showApplyCurrentAttributesButton = true
             } else {
                 self.parent.settings.showApplyCurrentAttributesButton = false
             }
-            
-//            if  self.parent.settings.applyCurrentAttributes {
-//                if let textRange = textView.selectedTextRange {
-//                    guard
-//                        let selectedText = textView.text(in: textRange),
-//                        let range = self.parent.attributedString.range(of: selectedText)
-//                    else { return }
-//                    self.parent.attributedString[range].mergeAttributes(self.parent.settings.currentAttributes)
-//                    self.parent.settings.applyCurrentAttributes = false
-//                }
-//            }
         }
-
+        
     }
 }

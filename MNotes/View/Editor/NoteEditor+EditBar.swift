@@ -105,6 +105,14 @@ extension NoteEditor {
             if settings.showApplyCurrentAttributesButton {
                 Button("Apply") {
                     settings.applyCurrentAttributes = true
+                    
+//                    if let index = vm.notes.firstIndex(where: {$0.id == vm.selectedNoteID }) {
+//                        if let range = vm.notes[index].attributedText.range(of: settings.selectedText) {
+//                            vm.notes[index].attributedText[range].mergeAttributes(settings.currentAttributes)
+//                            settings.applyCurrentAttributes = false
+//                        }
+//                    }
+                    
                 }
                 .frame(maxWidth: .infinity)
                 .transition(.scale)
