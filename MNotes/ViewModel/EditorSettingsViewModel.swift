@@ -46,15 +46,15 @@ struct FontSettings {
 class EditorSettingsViewModel: ObservableObject {
     
     @Published var showTextSettings: Bool = false
-    
 
     @Published var showApplyCurrentAttributesButton: Bool = false
     @Published var applyCurrentAttributes: Bool = false
     
     @Published var selectedText: String = ""
+    @Published var selectedRange: NSRange?
 
     @Published var fontSettings: FontSettings = .init()
-    @Published var currentAttributes: AttributeContainer = AttributeContainer()
+    @Published  var currentAttributes: [NSAttributedString.Key : Any] = Note.defaultNSAttributes
     
     // Image Picker
     @Published var showImagePicker: Bool = false
@@ -70,19 +70,13 @@ class EditorSettingsViewModel: ObservableObject {
         $fontSettings
             .sink { [weak self] (settings) in
                 guard let self = self else { return }
-                self.currentAttributes.foregroundColor = UIColor(settings.textColor)
-                self.currentAttributes.font = self.getUIFont()
-                if settings.isUnderline {
-                    self.currentAttributes.underlineStyle = .byWord
-                    self.currentAttributes.underlineColor = UIColor(settings.textColor)
-                }
-                if settings.isStrikethrough {
-                    self.currentAttributes.strikethroughStyle = .byWord
-                    self.currentAttributes.strikethroughColor = UIColor(settings.textColor)
-                }
-                if settings.isShadow {
-                    self.currentAttributes.shadow = self.makeShadowFont()
-                }
+                self.currentAttributes = [
+                    .foregroundColor: UIColor(settings.textColor),
+                    .font: self.getUIFont(),
+                    .strikethroughStyle: settings.isStrikethrough,
+                    .underlineStyle: settings.isUnderline,
+                    .shadow: self.makeShadowFont()
+                ]
             }
             .store(in: &cancelables)
     }

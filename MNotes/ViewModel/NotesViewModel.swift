@@ -18,6 +18,7 @@ import Combine
 class NotesViewModel: ObservableObject {
     
     @Published var notes: [Note] = [] // All availible Notes
+    @Published var filteredNotes: [Note] = [] // Filtered Notes
     
     @Published var selectedNotes: [Note] = [] // Notes for deletion
     @Published var selectedNoteID: String? // Selected Note ID for NavigationLink
@@ -33,6 +34,7 @@ class NotesViewModel: ObservableObject {
     
     init() {
         readNotes()
+        filterNotes()
     }
 }
 
@@ -49,38 +51,50 @@ extension NotesViewModel {
     @discardableResult
     func createNote(note: Note = .init(), at index: Int = 0 ) -> Note {
         notes.insert(note, at: index) // insert New Note to first position
-        dataService.notes.insert(note, at: index) // add to dataservise to correctly update searchable info ????? DOESNT WORK 
+//        dataService.notes.insert(note, at: index) // add to dataservise to correctly update searchable info ????? DOESNT WORK
         return note
     }
     /// Read Notes from local folders.
     /// Filter by search text
     /// Add Info Note
     func readNotes() {
-        $searchText
-            .debounce(for: 0.6, scheduler: RunLoop.main)
-            .combineLatest(dataService.$notes)
-            .map{ (text, notes) -> [Note] in
-                guard !text.isEmpty else { return notes }
-                let lowercasedText = text.lowercased()
-                let filteredData = notes.filter({ (element) -> Bool in
-                    element.attributedText.description.lowercased().contains(lowercasedText) //||
-//                    element.title.lowercased().contains(lowercasedText)
-                })
-                return filteredData
-            }
+        dataService.$notes
             .sink { [weak self] (returnedNotes) in
                 guard let self = self else { return }
                 self.notes = returnedNotes.sorted(by: { $0.date > $1.date })
             }
             .store(in: &noteCancelables)
     }
+    /// Filter by search text
+    /// Add Info Note
+    func filterNotes() {
+        $searchText
+            .debounce(for: 0.6, scheduler: RunLoop.main)
+            .combineLatest($notes)
+            .map{ (text, notes) -> [Note] in
+                guard !text.isEmpty else { return notes }
+                let lowercasedText = text.lowercased()
+                let filteredData = notes.filter({ (element) -> Bool in
+                    element.attributedText.string.lowercased().contains(lowercasedText)
+                })
+                return filteredData
+            }
+            .sink { [weak self] (returnedNotes) in
+                guard let self = self else { return }
+                self.filteredNotes = returnedNotes.sorted(by: { $0.date > $1.date })
+            }
+            .store(in: &noteCancelables)
+    }
     /// Update Node and save it to local folder
     func updateNote(note: Note) {
         if let noteID = notes.firstIndex(where: { $0.id == note.id }) {
-            notes[noteID] = note
-            print("[📝] Updated note: \(note.id) with title: \(note.title)")
+            if note != notes[noteID] {
+                notes[noteID] = note
+                print("[📝] Updated note: \(note.id) with title: \(note.title)")
+                dataService.saveNote(note: note)
+            }
         }
-        dataService.saveNote(note: note)
+        
     }
     /// Delete selected Nodes and remove them from local folder
     func removeSelectedNotes() {

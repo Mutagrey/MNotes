@@ -21,7 +21,7 @@ struct NotesCollection: View {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: columnsNum), spacing: padding, pinnedViews: [.sectionHeaders]) {
                 Section(header: headerView.padding(.horizontal, -15)) { }
                 ForEach(NoteCategory.allCases, id: \.self) { category in
-                    if vm.notes.filter({$0.category == category}).count > 0 {
+                    if vm.filteredNotes.filter({$0.category == category}).count > 0 {
                         Section(header: categoryHeaderView(category: category)) {
                             content(category: category)
                         }
@@ -50,7 +50,7 @@ extension NotesCollection {
     /// Row Element View
     private func content(category: NoteCategory) -> some View {
         
-        ForEach($vm.notes.filter({$0.category.wrappedValue == category})) { $note in
+        ForEach($vm.filteredNotes.filter({$0.category.wrappedValue == category})) { $note in
             Group{
                 if vm.isEditable {
                     NoteItemView(note: $note, categoryPosition: .vertical)

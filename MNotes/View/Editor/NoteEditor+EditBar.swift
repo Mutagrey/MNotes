@@ -105,25 +105,25 @@ extension NoteEditor {
             if settings.showApplyCurrentAttributesButton {
                 Button("Apply") {
                     settings.applyCurrentAttributes = true
-                    
-//                    if let index = vm.notes.firstIndex(where: {$0.id == vm.selectedNoteID }) {
-//                        if let range = vm.notes[index].attributedText.range(of: settings.selectedText) {
-//                            vm.notes[index].attributedText[range].mergeAttributes(settings.currentAttributes)
-//                            settings.applyCurrentAttributes = false
-//                        }
-//                    }
-                    
+                    if let index = vm.notes.firstIndex(where: {$0.id == vm.selectedNoteID }) {
+                        if let range = settings.selectedRange {
+                            vm.notes[index].attributedText.addAttributes(settings.currentAttributes, range: range)
+                            settings.applyCurrentAttributes = false
+                        }
+                    }
                 }
                 .frame(maxWidth: .infinity)
                 .transition(.scale)
                 .opacity(settings.showApplyCurrentAttributesButton ? 1 : 0)
-            }
-            
-            Group {
+            } else {
                 customEditBarButton(systemIconName: "camera", title: nil) {
                     settings.showImagePicker.toggle()
                 }
-                
+                .transition(.move(edge: .bottom))
+                .opacity(settings.showApplyCurrentAttributesButton ? 0 : 1)
+            }
+            
+            Group {
                 customEditBarButton(systemIconName: "trash", title: nil) {
                     dismiss = false
                     deletionAlert.toggle()

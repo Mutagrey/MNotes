@@ -16,14 +16,12 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> PHPickerViewController {
         let imgPicker = PHPickerViewController(configuration: defaultConfing())
-        
         imgPicker.delegate = context.coordinator
-        
         return imgPicker
     }
     
     func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
-        //
+        // No need
     }
     
     private func defaultConfing() -> PHPickerConfiguration {

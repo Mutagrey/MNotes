@@ -33,12 +33,12 @@ struct NoteItemView: View {
             CategoryPickerSelector(show: $showCategoryPicker, category: $note.category, size: categorySize, categoryPosition: categoryPosition)
                 .zIndex(1)
         }
+        // it doesnt work...need to fix......
         .onChange(of: note.category) { newValue in
             print("\(newValue?.rawValue ?? "ff")")
             vm.updateNote(note: note)
         }
         .contextMenu { ContextMenu(note: $note) }
-
 
     }
     
@@ -63,13 +63,15 @@ struct NoteItemView_Previews: PreviewProvider {
      private var gridView: some View {
          VStack(alignment: .leading, spacing: 3){
              Text("\(note.title)")
-                 .font(.system(size: 16, weight: .semibold, design: .rounded))
+                 .font(.system(size: 20, weight: .semibold, design: .rounded))
                  .foregroundColor(Color.accentColor)
                  .multilineTextAlignment(.leading)
                  .lineLimit(2)
              ScrollView(.vertical, showsIndicators: true) {
+                 if note.images.count > 0 { imageView }
                  Text(AttributedString(note.subtitle))
                      .multilineTextAlignment(.leading)
+                     .frame(maxWidth: .infinity, alignment: .leading)
              }
              Spacer(minLength: 0)
              Text("\(note.date.dateToString(formatString: "d.MM.y, E HH:mm"))")
@@ -81,6 +83,20 @@ struct NoteItemView_Previews: PreviewProvider {
          .padding(10)
          .background(Color(UIColor.secondarySystemBackground))
          .cornerRadius(cornerRadius)
+     }
+     
+     private var imageView: some View {
+         ScrollView(.horizontal, showsIndicators: false) {
+             HStack(spacing: 10) {
+                 ForEach(note.images, id: \.self) { uiImage in
+                     Image(uiImage: uiImage)
+                         .resizable()
+                         .aspectRatio(contentMode: .fit)
+                         .cornerRadius(5)
+                 }
+             }
+         }
+         .frame(height: 40)
      }
  }
 

@@ -32,7 +32,6 @@ struct UITextEditor: UIViewRepresentable {
  
     func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.attributedText = note.attributedText
-        updateSelectedText(for: uiView)
     }
     
     private func defaultStyle(for uiView: UITextView) {
@@ -41,16 +40,6 @@ struct UITextEditor: UIViewRepresentable {
         uiView.isEditable = true
         uiView.isScrollEnabled = true
         uiView.allowsEditingTextAttributes = true
-//        uiView.adjustsFontForContentSizeCategory = true
-    }
-
-    func updateSelectedText(for uiView: UITextView) {
-        if settings.applyCurrentAttributes {
-            guard let text = uiView.attributedText?.mutableCopy() as? NSMutableAttributedString else { return }
-            text.addAttributes(currentAttributes, range: uiView.selectedRange)
-            uiView.attributedText = text.copy() as? NSMutableAttributedString
-            settings.applyCurrentAttributes = false
-        }
     }
 }
 
@@ -83,7 +72,6 @@ extension UITextEditor {
 
         func textViewDidBeginEditing(_ textView: UITextView) {
             if self.parent.settings.showTextSettings { self.parent.settings.showTextSettings = false }
-//            self.parent.note.attributedText = NSMutableAttributedString(attributedString: textView.attributedText)
         }
 
         func textViewDidEndEditing(_ textView: UITextView) {
@@ -96,10 +84,14 @@ extension UITextEditor {
             return true
         }
         
-        
         func textViewDidChangeSelection(_ textView: UITextView) {
+            
             if let textRange = textView.selectedTextRange, let selectedText = textView.text(in: textRange) {
                 self.parent.settings.selectedText = selectedText
+                let begining = textView.beginningOfDocument
+                let location = textView.offset(from: begining, to: textRange.start)
+                let length = textView.offset(from: textRange.start, to: textRange.end)
+                self.parent.settings.selectedRange = NSMakeRange(location, length)
             }
             
             if !(textView.selectedTextRange?.isEmpty ?? true) {
@@ -107,7 +99,10 @@ extension UITextEditor {
             } else {
                 self.parent.settings.showApplyCurrentAttributesButton = false
             }
+            
         }
         
     }
 }
+
+

@@ -22,9 +22,7 @@ struct NoteEditor: View {
     
     @State var note: Note = .init()
     @State var deletionAlert: Bool = false
-    
-//    @Namespace var animation
-    
+        
     var body: some View {
         VStack(spacing: 0){
             UITextEditor(note: $note)
@@ -100,21 +98,18 @@ extension NoteEditor {
 extension NoteEditor {
     private var imageViwer: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: dismiss ? 15 : 15) {
-                ForEach(settings.images, id: \.self) { uiImage in
+            HStack(spacing: dismiss ? 10 : 15) {
+                ForEach(note.images, id: \.self) { uiImage in
                     Image(uiImage: uiImage)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .cornerRadius(dismiss ? 5 : 15)
+                        .cornerRadius(dismiss ? 5 : 10)
 //                        .matchedGeometryEffect(id: uiImage.hashValue, in: animation)
                 }
             }
-//            .onAppear{
-//                settings.images.removeAll()
-//            }
         }
-        .frame(height: dismiss ? 40 : 80)
-//        .transition(.move(edge: .bottom))
+        .frame(height: dismiss ? 35 : 50)
+        .transition(.move(edge: .bottom))
         .animation(.easeInOut, value: dismiss)
     }
 }
