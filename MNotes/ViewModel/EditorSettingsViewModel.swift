@@ -46,6 +46,8 @@ struct FontSettings {
 class EditorSettingsViewModel: ObservableObject {
     
     @Published var showTextSettings: Bool = false
+    
+
     @Published var showApplyCurrentAttributesButton: Bool = false
     @Published var applyCurrentAttributes: Bool = false
     
@@ -53,6 +55,10 @@ class EditorSettingsViewModel: ObservableObject {
 
     @Published var fontSettings: FontSettings = .init()
     @Published var currentAttributes: AttributeContainer = AttributeContainer()
+    
+    // Image Picker
+    @Published var showImagePicker: Bool = false
+    @Published var images: [UIImage] = []
     
     private var cancelables = Set<AnyCancellable>() // cancellables
     

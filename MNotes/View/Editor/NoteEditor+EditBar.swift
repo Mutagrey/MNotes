@@ -120,6 +120,10 @@ extension NoteEditor {
             }
             
             Group {
+                customEditBarButton(systemIconName: "camera", title: nil) {
+                    settings.showImagePicker.toggle()
+                }
+                
                 customEditBarButton(systemIconName: "trash", title: nil) {
                     dismiss = false
                     deletionAlert.toggle()
@@ -128,7 +132,7 @@ extension NoteEditor {
                     Alert(title: Text("Confirm Deletion"),
                         message: Text("Are you sure you want to clean all text?"),
                         primaryButton: .destructive(Text("Delete")) {
-                        note.attributedText = ""
+                        note.attributedText = NSMutableAttributedString(string: "")
                         },
                         secondaryButton: .cancel())
                 }

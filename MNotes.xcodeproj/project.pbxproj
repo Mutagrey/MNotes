@@ -11,7 +11,6 @@
 		411819A527E721A100668067 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411819A427E721A100668067 /* BlurView.swift */; };
 		411819A727E7399B00668067 /* NoteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411819A627E7399B00668067 /* NoteEditor.swift */; };
 		411819AB27E75B4900668067 /* AddNewNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411819AA27E75B4900668067 /* AddNewNote.swift */; };
-		411819AF27E7B6D000668067 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411819AE27E7B6D000668067 /* View.swift */; };
 		411819D527E8915700668067 /* ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411819D427E8915700668067 /* ContextMenu.swift */; };
 		411819D727E8B35300668067 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411819D627E8B35300668067 /* SettingsView.swift */; };
 		411819DB27EA3E4F00668067 /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411819DA27EA3E4F00668067 /* ShareButton.swift */; };
@@ -36,8 +35,12 @@
 		41B4B7B527ED6AEA00A61C80 /* SelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B7B427ED6AEA00A61C80 /* SelectionButton.swift */; };
 		41B4B7B727ED8B2F00A61C80 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B7B627ED8B2F00A61C80 /* UIFont.swift */; };
 		41B4B7B927EF2D5C00A61C80 /* NoteEditor+EditBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B7B827EF2D5C00A61C80 /* NoteEditor+EditBar.swift */; };
-		41B4B7BD27F198D600A61C80 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B7BC27F198D600A61C80 /* NSAttributedString.swift */; };
+		41B4B7BD27F198D600A61C80 /* AttributedConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B7BC27F198D600A61C80 /* AttributedConverter.swift */; };
 		41B4B7BF27F1E48400A61C80 /* UITextEditor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B7BE27F1E48400A61C80 /* UITextEditor2.swift */; };
+		41C3FF7F27F30DA200ACEA9B /* NoteDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FF7E27F30DA200ACEA9B /* NoteDocument.swift */; };
+		41C3FF8327F4DCC500ACEA9B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FF8227F4DCC500ACEA9B /* ImagePicker.swift */; };
+		41C3FF8527F6227100ACEA9B /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FF8427F6227100ACEA9B /* UIImage.swift */; };
+		41C3FF8727F6FD4D00ACEA9B /* Note+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FF8627F6FD4D00ACEA9B /* Note+Info.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +48,6 @@
 		411819A427E721A100668067 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		411819A627E7399B00668067 /* NoteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditor.swift; sourceTree = "<group>"; };
 		411819AA27E75B4900668067 /* AddNewNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNote.swift; sourceTree = "<group>"; };
-		411819AE27E7B6D000668067 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		411819D427E8915700668067 /* ContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenu.swift; sourceTree = "<group>"; };
 		411819D627E8B35300668067 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		411819DA27EA3E4F00668067 /* ShareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareButton.swift; sourceTree = "<group>"; };
@@ -71,8 +73,12 @@
 		41B4B7B427ED6AEA00A61C80 /* SelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionButton.swift; sourceTree = "<group>"; };
 		41B4B7B627ED8B2F00A61C80 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		41B4B7B827EF2D5C00A61C80 /* NoteEditor+EditBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteEditor+EditBar.swift"; sourceTree = "<group>"; };
-		41B4B7BC27F198D600A61C80 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
+		41B4B7BC27F198D600A61C80 /* AttributedConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedConverter.swift; sourceTree = "<group>"; };
 		41B4B7BE27F1E48400A61C80 /* UITextEditor2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextEditor2.swift; sourceTree = "<group>"; };
+		41C3FF7E27F30DA200ACEA9B /* NoteDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDocument.swift; sourceTree = "<group>"; };
+		41C3FF8227F4DCC500ACEA9B /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		41C3FF8427F6227100ACEA9B /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		41C3FF8627F6FD4D00ACEA9B /* Note+Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Info.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,7 @@
 				4170431327E22C8400E894C0 /* FontFromatView.swift */,
 				41B4B77027EB5FAD00A61C80 /* UITextEditor.swift */,
 				41B4B7BE27F1E48400A61C80 /* UITextEditor2.swift */,
+				41C3FF7E27F30DA200ACEA9B /* NoteDocument.swift */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -161,6 +168,7 @@
 				4170434F27E4D21200E894C0 /* TabViewNotes.swift */,
 				411819A227E644CC00668067 /* CategoryPicker.swift */,
 				411819D627E8B35300668067 /* SettingsView.swift */,
+				41C3FF8227F4DCC500ACEA9B /* ImagePicker.swift */,
 				411819AD27E78A8F00668067 /* Editor */,
 			);
 			path = View;
@@ -170,6 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				4170430127E0F89800E894C0 /* Note.swift */,
+				41C3FF8627F6FD4D00ACEA9B /* Note+Info.swift */,
+				41B4B7BC27F198D600A61C80 /* AttributedConverter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -196,10 +206,9 @@
 			isa = PBXGroup;
 			children = (
 				4170431127E21C7400E894C0 /* Color.swift */,
-				411819AE27E7B6D000668067 /* View.swift */,
 				4170430D27E1ED9100E894C0 /* Date.swift */,
 				41B4B7B627ED8B2F00A61C80 /* UIFont.swift */,
-				41B4B7BC27F198D600A61C80 /* NSAttributedString.swift */,
+				41C3FF8427F6227100ACEA9B /* UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -281,13 +290,14 @@
 				41B4B7B327ED6A5D00A61C80 /* PinButton.swift in Sources */,
 				41B4B7B927EF2D5C00A61C80 /* NoteEditor+EditBar.swift in Sources */,
 				4170430227E0F89800E894C0 /* Note.swift in Sources */,
-				41B4B7BD27F198D600A61C80 /* NSAttributedString.swift in Sources */,
+				41B4B7BD27F198D600A61C80 /* AttributedConverter.swift in Sources */,
 				41B4B7B727ED8B2F00A61C80 /* UIFont.swift in Sources */,
+				41C3FF8527F6227100ACEA9B /* UIImage.swift in Sources */,
 				41B4B7BF27F1E48400A61C80 /* UITextEditor2.swift in Sources */,
 				4170431227E21C7400E894C0 /* Color.swift in Sources */,
 				41B4B77127EB5FAD00A61C80 /* UITextEditor.swift in Sources */,
-				411819AF27E7B6D000668067 /* View.swift in Sources */,
 				4170430427E0F91800E894C0 /* NotesViewModel.swift in Sources */,
+				41C3FF7F27F30DA200ACEA9B /* NoteDocument.swift in Sources */,
 				4170435427E6287500E894C0 /* EditorSettingsViewModel.swift in Sources */,
 				4170435027E4D21200E894C0 /* TabViewNotes.swift in Sources */,
 				4170434427E33D1300E894C0 /* NoteItemView.swift in Sources */,
@@ -296,7 +306,9 @@
 				411819AB27E75B4900668067 /* AddNewNote.swift in Sources */,
 				41B4B7B527ED6AEA00A61C80 /* SelectionButton.swift in Sources */,
 				4170431427E22C8400E894C0 /* FontFromatView.swift in Sources */,
+				41C3FF8327F4DCC500ACEA9B /* ImagePicker.swift in Sources */,
 				411819A527E721A100668067 /* BlurView.swift in Sources */,
+				41C3FF8727F6FD4D00ACEA9B /* Note+Info.swift in Sources */,
 				417042E327E0F80800E894C0 /* MNotesApp.swift in Sources */,
 				411819D727E8B35300668067 /* SettingsView.swift in Sources */,
 				4170430E27E1ED9100E894C0 /* Date.swift in Sources */,
@@ -431,11 +443,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_ASSET_PATHS = "\"MNotes/Preview Content\"";
 				DEVELOPMENT_TEAM = 6AZ8WMLP5K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Need to get Image";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need to save image";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -446,7 +460,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mutagrey.MNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -461,11 +475,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_ASSET_PATHS = "\"MNotes/Preview Content\"";
 				DEVELOPMENT_TEAM = 6AZ8WMLP5K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Need to get Image";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need to save image";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -476,7 +492,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mutagrey.MNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

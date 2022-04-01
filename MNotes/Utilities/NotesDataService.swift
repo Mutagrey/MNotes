@@ -38,7 +38,7 @@ class NotesDataService {
             
             // Load additional data
             if folders.count == 0 {
-                self.notes.append(self.getInfoNote())
+                self.notes.append(Note.infoNote)
                 self.notes.forEach({ self.saveNote(note: $0) })
             }
             
@@ -72,32 +72,9 @@ class NotesDataService {
     func saveNote(note: Note) {
         // Gets JSON URL rootURL/<ID>/Note.json
         let jsonURL = note.folderURL.appendingPathComponent("Note.json")
-        if !note.attributedText.characters.isEmpty {
+        if !note.attributedText.string.isEmpty {
             LocalFileManager.saveJSON(to: jsonURL, data: note)
         }
     }
     
 }
-
-// MARK: - Additional Loanding data
-extension NotesDataService {
-
-    /// Add First Info Note
-    func getInfoNote() -> Note {
-        var infoNote = Note()
-        infoNote.attributedText = AttributedString("""
-                This is the Note Info \r
-                Tap to Edit this Note \r
-                Features: \n
-                - Edit note \r
-                - Change font style \r
-                - Change text color \r
-                - Pin note \r
-                - Choose color category for your Note
-                """, attributes: Note.defaultAttributes())
-        infoNote.attributedText.foregroundColor = UIColor.systemOrange
-        infoNote.isPinned = true
-        return infoNote
-    }
-}
-

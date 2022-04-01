@@ -68,7 +68,7 @@ struct NoteItemView_Previews: PreviewProvider {
                  .multilineTextAlignment(.leading)
                  .lineLimit(2)
              ScrollView(.vertical, showsIndicators: true) {
-                 Text(note.attributedText)
+                 Text(AttributedString(note.subtitle))
                      .multilineTextAlignment(.leading)
              }
              Spacer(minLength: 0)

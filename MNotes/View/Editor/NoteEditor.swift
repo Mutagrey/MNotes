@@ -23,12 +23,18 @@ struct NoteEditor: View {
     @State var note: Note = .init()
     @State var deletionAlert: Bool = false
     
+//    @Namespace var animation
+    
     var body: some View {
         VStack(spacing: 0){
-            UITextEditor(attributedString: $note.attributedText)
+            UITextEditor(note: $note)
                 .focused($dismiss)
-                .padding()
+                .padding(.vertical, 8)
+                .padding(.horizontal, 8)
             Spacer(minLength: 0)
+            imageViwer
+                .padding(.horizontal)
+                .padding(.bottom, 8)
             editBar
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -41,6 +47,9 @@ struct NoteEditor: View {
             }
         }
         .overlay(CategoryPickerSelector(show: $showCategoryPicker, category: $note.category, size: 20, categoryPosition: .vertical), alignment: .topTrailing)
+        .sheet(isPresented: $settings.showImagePicker) {
+            ImagePicker(results: $settings.images, attributedString: $note.attributedText)
+        }
         // Update and save changes
         .onDisappear {
             if note.wordsCount == 0 {
@@ -51,7 +60,7 @@ struct NoteEditor: View {
         }
         .onChange(of: scenePhase) { newValue in
             if newValue == .background || newValue == .inactive {
-                if note.attributedText.characters.count > 0 {
+                if note.attributedText.string.count > 0 {
                     vm.updateNote(note: note)
                 }
             }
@@ -76,8 +85,6 @@ struct NoteEditor_Previews: PreviewProvider {
 extension NoteEditor {
     func topToolBar(note: Note) -> some View {
         HStack {
-            Text("\(note.runsCount) runs")
-                .font(.subheadline)
             VStack(alignment: .trailing, spacing: 6){
                 Text("\(note.wordsCount) words")
                     .font(.subheadline)
@@ -87,5 +94,27 @@ extension NoteEditor {
             }
             PinButton(note: $note)
         }
+    }
+}
+// MARK: - ImageViwer
+extension NoteEditor {
+    private var imageViwer: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: dismiss ? 15 : 15) {
+                ForEach(settings.images, id: \.self) { uiImage in
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(dismiss ? 5 : 15)
+//                        .matchedGeometryEffect(id: uiImage.hashValue, in: animation)
+                }
+            }
+//            .onAppear{
+//                settings.images.removeAll()
+//            }
+        }
+        .frame(height: dismiss ? 40 : 80)
+//        .transition(.move(edge: .bottom))
+        .animation(.easeInOut, value: dismiss)
     }
 }

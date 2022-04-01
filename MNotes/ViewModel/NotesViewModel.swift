@@ -49,7 +49,7 @@ extension NotesViewModel {
     @discardableResult
     func createNote(note: Note = .init(), at index: Int = 0 ) -> Note {
         notes.insert(note, at: index) // insert New Note to first position
-//        dataService.notes.insert(note, at: index) // add to dataservise to correctly update searchable info ????? DOESNT WORK 
+        dataService.notes.insert(note, at: index) // add to dataservise to correctly update searchable info ????? DOESNT WORK 
         return note
     }
     /// Read Notes from local folders.
@@ -97,7 +97,7 @@ extension NotesViewModel {
         
         // 4. Add Info Note if needed
         if notes.count == 0 {
-            createNote(note: dataService.getInfoNote())
+            createNote(note: Note.infoNote)
         }
         // 5. Toogle Editable
         isEditable = false
@@ -113,7 +113,7 @@ extension NotesViewModel {
 
         // 3. Add Info Note if needed
         if notes.count == 0 {
-            createNote(note: dataService.getInfoNote())
+            createNote(note: Note.infoNote)
         }
         // 4. Toogle Editable
         isEditable = false
