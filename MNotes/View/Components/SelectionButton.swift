@@ -10,18 +10,25 @@ import SwiftUI
 // MARK: - Selected Note View
 struct SelectionButton: View {
     @EnvironmentObject var vm: NotesViewModel
-//    @AppStorage("fontSize") var fontSize: Double = 13
+
     var note: Note
     
     var body: some View{
-        if vm.isEditable {
-            Image(systemName: vm.isSelected(note: note) ? "checkmark.circle.fill" : "circle")
-                .font(.title2)
-                .foregroundColor(Color(UIColor.systemIndigo))
-                .background(Color(UIColor.secondarySystemBackground).opacity(0.5))
-                .mask(Circle())
-                .padding(10)
+        VStack{
+            if vm.isEditable {
+                Image(systemName: vm.isSelected(note: note) ? "checkmark.circle.fill" : "circle")
+                    .font(.title3)
+//                    .foregroundColor(Color.theme.buttonColor)
+                    .foregroundColor(vm.isSelected(note: note) ? Color.theme.buttonColor : Color.white.opacity(0.7))
+                    .background(vm.isSelected(note: note) ? Color.white : Color.clear)
+                    .mask(Circle())
+                    .padding(10)
+                    .opacity(vm.isEditable ? 1 : 0)
+                    .transition(.scale)
+            }
+            
         }
+        .animation(.easeInOut, value: vm.isEditable)
     }
 }
 

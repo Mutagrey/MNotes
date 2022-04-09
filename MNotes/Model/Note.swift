@@ -63,7 +63,7 @@ struct Note: Identifiable, Hashable {
     // Gets subtitle of NSMutableAttributedString with default font size
     private func getSubtitle() -> NSAttributedString {
         let startIndex = title.count + 1
-        let lastIndex = attributedText.string.count - startIndex - 1
+        let lastIndex = attributedText.string.count - startIndex //- 1
         let range = NSMakeRange(startIndex, lastIndex)
         let attributes: [NSAttributedString.Key : Any] = Note.defaultNSAttributes.filter({$0.key == .font})
         
@@ -96,10 +96,10 @@ struct Note: Identifiable, Hashable {
     private func getImages() -> [UIImage] {
         var images: [UIImage] = []
         attributedText.enumerateAttribute(.attachment, in: NSRange(0..<attributedText.length)) { value, range, stop in
-            if let attachment = value as? NSTextAttachment {
-                if let image = attachment.image {
-                    images.append(image)
-                }
+            if let attachment = value as? NSTextAttachment,
+               let data = attachment.fileWrapper?.regularFileContents,
+               let img = UIImage(data: data) {
+                images.append(img)
             }
         }
         return images

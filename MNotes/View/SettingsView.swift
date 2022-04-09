@@ -12,6 +12,7 @@ struct SettingsView: View {
     @AppStorage("padding") var padding: Double = 3
     @AppStorage("cornerRadius") var cornerRadius: Double = 12
     @AppStorage("columns") var columns: Int = 2
+//    @AppStorage("bgColor") var bgColor: Color = Color(UIColor.secondarySystemBackground)
 //    @AppStorage("sortBy") var sortBy: SortBy = .category
     
     var body: some View {

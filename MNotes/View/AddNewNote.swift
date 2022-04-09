@@ -36,12 +36,27 @@ struct AddNewNote: View {
                     .padding()
                     .foregroundColor(Color.white)
                     .scaleEffect(showButtonAnimation ? 1.1 : 1)
-                    .background(Color(UIColor.systemIndigo))
                     .clipShape(Circle())
                     .rotationEffect(.init(degrees: showCategoryPicker ? 45 : 0))
+                    .overlay(
+                        Circle()
+                            .stroke(
+                                LinearGradient(colors: [Color.theme.buttonColor.opacity(0.8), Color.theme.buttonColor.opacity(0.6)], startPoint: .topLeading, endPoint: .bottomTrailing),
+                                lineWidth: showButtonAnimation ? 6 : 4)
+                    )
             }
             .scaleEffect(showButtonAnimation ? 1.1 : 1)
             .zIndex(1)
+            .background(
+                ZStack{
+                    Circle()
+//                        .shadow(color: Color.black.opacity(0.7), radius: 5, x: -5, y: -5)
+                        .shadow(color: Color.black.opacity(0.7), radius: 5, x: 5, y: 5)
+                        .blendMode(.overlay)
+                    Circle()
+                        .fill(Color.theme.buttonColor)
+                }
+            )
         }
         .padding()
         .transition(.move(edge: .bottom))
@@ -49,7 +64,10 @@ struct AddNewNote: View {
             if let newCategory = newValue {
                 let newNote = vm.createNote(note: .init(category: newCategory), at: 0)
                 print("NewNote ID: \(newNote.id)")
-                vm.selectedNoteID = newNote.id
+                vm.selectedNote = newNote
+                withAnimation(.easeInOut) {
+                    vm.showDetailView = true
+                }
                 category = nil
             }
         }

@@ -14,14 +14,7 @@ extension Color {
 
 struct ColorTheme {
     let accent = Color("AccentColor")
-    let background = Color("bgColor")
-//    let background2 = Color("bgColor2")
-//    let background3 = Color("bgColor3")
-//    let gradientColors = [Color("bgColor3").opacity(1),Color("bgColor3").opacity(1)]
-
-//    let textColor = Color("TextColor")
-//    let logoColor = Color("logoColor")
-//    let secondaryTextColor = Color("secondaryTextColor")
-//    let secondaryBackground = Color("secondaryBG")
-    
+    let background =  Color(#colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)) //Color(UIColor.secondarySystemBackground)
+    let noteColor = Color(UIColor.systemGray5)
+    let buttonColor = Color(UIColor.systemIndigo)
 }

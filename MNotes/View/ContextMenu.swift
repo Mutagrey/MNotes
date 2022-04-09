@@ -13,7 +13,7 @@ struct ContextMenu: View {
     
     var body: some View {
         VStack{
-            ShareButton(items: [note.attributedText.description]) {
+            ShareButton(items: [note.attributedText.string]) {
                 Label("Share", systemImage: "square.and.arrow.up")
             }
 

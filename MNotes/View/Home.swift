@@ -9,32 +9,54 @@ import SwiftUI
 
 struct Home: View {
     @EnvironmentObject var vm: NotesViewModel
-    
     @State private var showCategoryPicker: Bool = false
     @State private var showSettings: Bool = false
-
+    @Namespace var animation
+    
     var body: some View {
         NavigationView {
             NotesCollection()
                 .transition(.move(edge: .bottom))
-                .padding(.horizontal, 10)
-                .navigationBarTitle("My Notes")
-                .navigationBarHidden(showCategoryPicker)
+                .navigationBarTitle(Text(showCategoryPicker ? "" : "\(vm.notes.count) notes"))
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         editButton
                     }
-                    ToolbarItemGroup(placement: .bottomBar) {
-                            bottomToolbar
-                    }
                     ToolbarItemGroup(placement: .navigationBarLeading) {
                         settingsButton
                     }
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        if !vm.showDetailView {
+                            bottomToolbar
+                                .transition(.move(edge: .bottom))
+                                .animation(.easeInOut, value: vm.showDetailView)
+                        }
+                    }
                 }
-                .overlay(BlurView(effect: .systemUltraThinMaterialDark).opacity(showCategoryPicker ? 1 : 0).ignoresSafeArea().onTapGesture{ withAnimation(.spring()) { showCategoryPicker.toggle() } })
+                .overlay(
+                    BlurView(effect: .systemUltraThinMaterialDark)
+                        .opacity(showCategoryPicker ? 1 : 0)
+                        .ignoresSafeArea()
+                        .onTapGesture{
+                            withAnimation(.spring()){
+                                showCategoryPicker.toggle()
+                            }
+                        }
+                    
+                )
                 .overlay(ZStack{ if !vm.isEditable { AddNewNote(showCategoryPicker: $showCategoryPicker) } }, alignment: .bottomTrailing)
                 .animation(.easeInOut, value: vm.isEditable)
+                .background( Color.theme.background.ignoresSafeArea() )
+                .overlay{
+                    // Hidden Navigation Link
+                    NavigationLink(destination: NoteEditor(note: $vm.selectedNote), isActive: $vm.showDetailView) {
+                        EmptyView()
+                    }
+                    .hidden()
+                }
         }
+
         .navigationViewStyle(StackNavigationViewStyle())
         .searchable(text: $vm.searchText, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "Search Notes")
         .sheet(isPresented: $showSettings) {
@@ -48,8 +70,6 @@ struct Home_Previews: PreviewProvider {
         Group {
             Home()
                 .preferredColorScheme(.dark)
-                .environmentObject(NotesViewModel())
-            Home()
                 .environmentObject(NotesViewModel())
         }
     }

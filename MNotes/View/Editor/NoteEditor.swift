@@ -14,13 +14,13 @@ struct NoteEditor: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.presentationMode) var presentationMode
     
-    @Binding var selectedNoteID: String?
+    @Binding var note: Note
     @FocusState var dismiss: Bool
     
     @State private var showCategoryPicker: Bool = false
     @State private var category: NoteCategory?
     
-    @State var note: Note = .init()
+//    @State var note: Note = .init()
     @State var deletionAlert: Bool = false
         
     var body: some View {
@@ -30,21 +30,20 @@ struct NoteEditor: View {
                 .padding(.vertical, 8)
                 .padding(.horizontal, 8)
             Spacer(minLength: 0)
-            imageViwer
-                .padding(.horizontal)
-                .padding(.bottom, 8)
-            editBar
+            VStack{
+                Divider()
+                editBar
+                if !dismiss { editMenuBar }
+            }
         }
+        .background(Color.theme.background.ignoresSafeArea())
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing) {
                 topToolBar(note: note)
             }
-            ToolbarItemGroup(placement: .bottomBar) {
-                if !dismiss { editMenuBar }
-            }
         }
-        .overlay(CategoryPickerSelector(show: $showCategoryPicker, category: $note.category, size: 20, categoryPosition: .vertical), alignment: .topTrailing)
+        .overlay(CategoryPickerSelector(show: $showCategoryPicker, note: $note, size: 20, categoryPosition: .vertical), alignment: .topTrailing)
         .sheet(isPresented: $settings.showImagePicker) {
             ImagePicker(results: $settings.images, attributedString: $note.attributedText)
         }
@@ -63,17 +62,13 @@ struct NoteEditor: View {
                 }
             }
         }
-        .onAppear {
-            if let note = vm.notes.first(where: {$0.id == selectedNoteID}) {
-                self.note = note
-            }
-        }
+
     }
 }
 
 struct NoteEditor_Previews: PreviewProvider {
     static var previews: some View {
-        NoteEditor(selectedNoteID: .constant(""))
+        NoteEditor(note: .constant(.infoNote))
             .environmentObject(NotesViewModel())
             .environmentObject(EditorSettingsViewModel())
     }
@@ -97,19 +92,22 @@ extension NoteEditor {
 // MARK: - ImageViwer
 extension NoteEditor {
     private var imageViwer: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: dismiss ? 10 : 15) {
-                ForEach(note.images, id: \.self) { uiImage in
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(dismiss ? 5 : 10)
-//                        .matchedGeometryEffect(id: uiImage.hashValue, in: animation)
+        HStack{
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: dismiss ? 10 : 15) {
+                    ForEach(note.images, id: \.self) { uiImage in
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(dismiss ? 5 : 10)
+                    }
                 }
             }
+            
         }
         .frame(height: dismiss ? 35 : 50)
         .transition(.move(edge: .bottom))
         .animation(.easeInOut, value: dismiss)
+        
     }
 }

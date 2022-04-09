@@ -40,6 +40,9 @@
 		41C3FF8527F6227100ACEA9B /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FF8427F6227100ACEA9B /* UIImage.swift */; };
 		41C3FF8727F6FD4D00ACEA9B /* Note+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FF8627F6FD4D00ACEA9B /* Note+Info.swift */; };
 		41C3FF8927F71EDC00ACEA9B /* Note+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FF8827F71EDC00ACEA9B /* Note+Codable.swift */; };
+		41C3FF8D27FA238800ACEA9B /* NeumorphicModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FF8C27FA238800ACEA9B /* NeumorphicModifier.swift */; };
+		41C3FFB627FE0D8300ACEA9B /* ScaledButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FFB527FE0D8300ACEA9B /* ScaledButtonStyle.swift */; };
+		41C3FFBA27FE0FA300ACEA9B /* OffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FFB927FE0FA300ACEA9B /* OffsetModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +80,9 @@
 		41C3FF8427F6227100ACEA9B /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		41C3FF8627F6FD4D00ACEA9B /* Note+Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Info.swift"; sourceTree = "<group>"; };
 		41C3FF8827F71EDC00ACEA9B /* Note+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Codable.swift"; sourceTree = "<group>"; };
+		41C3FF8C27FA238800ACEA9B /* NeumorphicModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphicModifier.swift; sourceTree = "<group>"; };
+		41C3FFB527FE0D8300ACEA9B /* ScaledButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledButtonStyle.swift; sourceTree = "<group>"; };
+		41C3FFB927FE0FA300ACEA9B /* OffsetModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffsetModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,7 @@
 				411819DA27EA3E4F00668067 /* ShareButton.swift */,
 				41B4B7B227ED6A5D00A61C80 /* PinButton.swift */,
 				41B4B7B427ED6AEA00A61C80 /* SelectionButton.swift */,
+				41C3FFB527FE0D8300ACEA9B /* ScaledButtonStyle.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -134,7 +141,6 @@
 				417042E227E0F80800E894C0 /* MNotesApp.swift */,
 				417042E427E0F80800E894C0 /* ContentView.swift */,
 				4170430C27E1ED8600E894C0 /* Extensions */,
-				417042F527E0F85B00E894C0 /* Utilities */,
 				417042F227E0F81D00E894C0 /* ViewModel */,
 				417042F127E0F81900E894C0 /* Model */,
 				417042F027E0F81400E894C0 /* View */,
@@ -155,6 +161,7 @@
 		417042F027E0F81400E894C0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				41C3FFB927FE0FA300ACEA9B /* OffsetModifier.swift */,
 				411819AC27E789F500668067 /* Components */,
 				4170435127E6174200E894C0 /* Home.swift */,
 				4170430527E0F9A100E894C0 /* NotesCollection.swift */,
@@ -166,6 +173,7 @@
 				411819D627E8B35300668067 /* SettingsView.swift */,
 				41C3FF8227F4DCC500ACEA9B /* ImagePicker.swift */,
 				411819AD27E78A8F00668067 /* Editor */,
+				41C3FF8C27FA238800ACEA9B /* NeumorphicModifier.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -206,6 +214,7 @@
 				4170430D27E1ED9100E894C0 /* Date.swift */,
 				41B4B7B627ED8B2F00A61C80 /* UIFont.swift */,
 				41C3FF8427F6227100ACEA9B /* UIImage.swift */,
+				417042F527E0F85B00E894C0 /* Utilities */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -290,11 +299,13 @@
 				41B4B7BD27F198D600A61C80 /* AttributedConverter.swift in Sources */,
 				41B4B7B727ED8B2F00A61C80 /* UIFont.swift in Sources */,
 				41C3FF8527F6227100ACEA9B /* UIImage.swift in Sources */,
+				41C3FFB627FE0D8300ACEA9B /* ScaledButtonStyle.swift in Sources */,
 				4170431227E21C7400E894C0 /* Color.swift in Sources */,
 				41B4B77127EB5FAD00A61C80 /* UITextEditor.swift in Sources */,
 				4170430427E0F91800E894C0 /* NotesViewModel.swift in Sources */,
 				4170435427E6287500E894C0 /* EditorSettingsViewModel.swift in Sources */,
 				4170435027E4D21200E894C0 /* TabViewNotes.swift in Sources */,
+				41C3FFBA27FE0FA300ACEA9B /* OffsetModifier.swift in Sources */,
 				4170434427E33D1300E894C0 /* NoteItemView.swift in Sources */,
 				4170435227E6174200E894C0 /* Home.swift in Sources */,
 				411819A327E644CC00668067 /* CategoryPicker.swift in Sources */,
@@ -308,6 +319,7 @@
 				411819D727E8B35300668067 /* SettingsView.swift in Sources */,
 				4170430E27E1ED9100E894C0 /* Date.swift in Sources */,
 				4170434827E3D36800E894C0 /* NotesDataService.swift in Sources */,
+				41C3FF8D27FA238800ACEA9B /* NeumorphicModifier.swift in Sources */,
 				41C3FF8927F71EDC00ACEA9B /* Note+Codable.swift in Sources */,
 				411819DB27EA3E4F00668067 /* ShareButton.swift in Sources */,
 				411819D527E8915700668067 /* ContextMenu.swift in Sources */,

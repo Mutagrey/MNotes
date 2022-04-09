@@ -28,6 +28,7 @@ struct NotesCollection: View {
                     }
                 }
             }
+            .padding(.horizontal)
         }
     }
 }
@@ -49,24 +50,20 @@ struct NotesList_Previews: PreviewProvider {
 extension NotesCollection {
     /// Row Element View
     private func content(category: NoteCategory) -> some View {
-        
         ForEach($vm.filteredNotes.filter({$0.category.wrappedValue == category})) { $note in
-            Group{
-                if vm.isEditable {
-                    NoteItemView(note: $note, categoryPosition: .vertical)
-                        .onTapGesture {
-                            vm.toggleSelected(note: note)
+            NoteItemView(note: $note, categoryPosition: .vertical)
+                .matchedGeometryEffect(id: note.id, in: animation)
+                .padding(padding)
+                .onTapGesture {
+                    if vm.isEditable {
+                        vm.toggleSelected(note: note)
+                    } else {
+                        vm.selectedNote = note
+                        withAnimation(.easeInOut) {
+                            vm.showDetailView = true
                         }
-                } else {
-                    NavigationLink(tag: note.id, selection: $vm.selectedNoteID) {
-                        NoteEditor(selectedNoteID: $vm.selectedNoteID)
-                    } label: {
-                        NoteItemView(note: $note, categoryPosition: .vertical)
                     }
                 }
-            }
-            .matchedGeometryEffect(id: note.id, in: animation)
-            .padding(.vertical, padding)
         }
     }
 }
@@ -74,7 +71,7 @@ extension NotesCollection {
 // MARK: - Headers for LazyVGrid
 extension NotesCollection {
     private var headerView: some View{
-        VStack{
+        VStack(spacing: 6.0){
             HStack {
                 Text("Pinned Notes")
                     .font(.title2)
@@ -82,7 +79,7 @@ extension NotesCollection {
                     .foregroundColor(Color.primary)
                 Spacer()
                 Button {
-                    withAnimation(.spring()) {
+                    withAnimation(.easeInOut) {
                         showPinnedCollection.toggle()
                     }
                 } label: {
@@ -101,19 +98,24 @@ extension NotesCollection {
                     .font(.subheadline)
                     .padding(5)
                     .padding(.horizontal, 8)
-                    .background(Color(UIColor.secondarySystemFill))
                     .mask(Capsule())
                 }
             }
             .padding(.horizontal)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                withAnimation(.easeInOut) {
+                    showPinnedCollection.toggle()
+                }
+            }
             if showPinnedCollection {
                 TabViewNotes()
                     .frame(height: showPinnedCollection ? nil : 0)
                     .opacity(showPinnedCollection ? 1 : 0)
             }
         }
-        .background(Color(UIColor.systemBackground))
         .clipped()
+
     }
     
     private func categoryHeaderView(category: NoteCategory) -> some View{
@@ -125,9 +127,19 @@ extension NotesCollection {
                 .font(.caption)
                 .foregroundColor(Color.primary)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical, 6)
         .padding(.horizontal)
-        .background(Color(UIColor.systemBackground).opacity(0.5))
+        .background(
+            LinearGradient(colors: [
+                category.color.opacity(0.1),
+                category.color.opacity(0.05),
+                Color.clear
+            ],
+                           startPoint: .topLeading,
+                           endPoint: .bottomTrailing)
+            
+        )
         .clipShape(Capsule())
     }
 }

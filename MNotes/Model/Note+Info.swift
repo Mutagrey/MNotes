@@ -22,7 +22,7 @@ extension Note {
             .strikethroughStyle: false,
             .underlineStyle: false,
         ]
-        textInfo.append(.init(attributedString: NSAttributedString(string: "MNotes \n", attributes: attributes)))
+        textInfo.append(.init(attributedString: NSAttributedString(string: "📝MNotes \r", attributes: attributes)))
 
         
         // Title2
@@ -32,13 +32,13 @@ extension Note {
             .strikethroughStyle: false,
             .underlineStyle: false,
         ]
-        textInfo.append(.init(attributedString: NSAttributedString(string: "This is the Note Info \n", attributes: attributes)))
+        textInfo.append(.init(attributedString: NSAttributedString(string: "This is the Note Info \r", attributes: attributes)))
 
-        // Icon
-        let attachment = NSTextAttachment(image: UIImage(named: "notesIcon")!)
-        attachment.image = UIImage(named: "notesIcon")?.withRoundedCorners(toWidth: 50, radius: 5)
-        attachment.bounds = CGRect(x: 0, y: 0, width: 50, height: 50)
-        textInfo.append(.init(attachment: attachment))
+//        // Icon
+//        let attachment = NSTextAttachment(image: UIImage(named: "notesIcon")!)
+//        attachment.image = UIImage(named: "notesIcon")?.withRoundedCorners(toWidth: 50, radius: 5)
+//        attachment.bounds = CGRect(x: 0, y: 0, width: 50, height: 50)
+//        textInfo.append(.init(attachment: attachment))
         
         // Subtitle
         attributes = [
@@ -47,7 +47,7 @@ extension Note {
             .strikethroughStyle: false,
             .underlineStyle: false,
         ]
-        textInfo.append(.init(attributedString: NSAttributedString(string: "\nTap to Edit this Note \r", attributes: attributes)))
+        textInfo.append(.init(attributedString: NSAttributedString(string: "Tap to Edit this Note \r", attributes: attributes)))
         
         // Features
         attributes = [

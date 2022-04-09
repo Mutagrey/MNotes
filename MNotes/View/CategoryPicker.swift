@@ -31,26 +31,22 @@ struct CategoryPicker: View {
         ZStack{
             if position == .vertical {
                 if show {
-//                    ScrollView(.vertical){
-                        VStack(spacing: 15){
-                            content
-                        }
-//                    }
+                    VStack(spacing: 6){
+                        content
+                    }
                     .transition(.move(edge: transition))
-
+                    .padding(.vertical, size / 2)
                 }
             } else {
                 if show {
-//                    ScrollView(.horizontal) {
-                        HStack(spacing: 15){
-                            content
-                        }
-//                    }
+                    HStack(spacing: 6){
+                        content
+                    }
                     .transition(.move(edge: .trailing))
+                    .padding(.horizontal, size / 2)
                 }
             }
         }
-        .padding(size / 2)
         .opacity(show ? 1 : 0)
 
     }
@@ -67,8 +63,21 @@ struct CategoryPicker: View {
                 Circle()
                     .fill(category.color)
                     .frame(width: size, height: size)
-                    .padding(size / 2)
+                    .background(
+                        ZStack{
+                            Circle()
+                                .shadow(color: Color.white.opacity(0.7), radius: 8, x: -5, y: -5)
+                                .shadow(color: Color.black.opacity(0.7), radius: 5, x: 5, y: 5)
+                                .blendMode(.overlay)
+                            Circle()
+                                .fill(category.color)
+                        }
+                    )
+                    .padding(size / 1.4 )
             }
+            .contentShape(Circle())
+            .buttonStyle(PlainButtonStyle())
+
         }
     }
 }
@@ -89,12 +98,11 @@ struct CategoryPickerSelector: View {
         case right
     }
     
-    @AppStorage("cornerRadius") var cornerRadius: Double = 12
     
     @EnvironmentObject var vm: NotesViewModel
 
     @Binding var show: Bool
-    @Binding var category: NoteCategory?
+    @Binding var note: Note
     let size: CGFloat
     let autoCloseTime: CGFloat
     
@@ -103,9 +111,9 @@ struct CategoryPickerSelector: View {
     @State private var showButtonAnimation: Bool = false
     
     
-    init(show: Binding<Bool>, category: Binding<NoteCategory?>, size: CGFloat = 25, autoCloseTime: CGFloat = 2, categoryPosition: CategoryPosition = .vertical) {
+    init(show: Binding<Bool>, note: Binding<Note>, size: CGFloat = 25, autoCloseTime: CGFloat = 3, categoryPosition: CategoryPosition = .vertical) {
         self._show = show
-        self._category = category
+        self._note = note
         self.size = size
         self.autoCloseTime = autoCloseTime
         self.categoryPosition = categoryPosition
@@ -116,8 +124,8 @@ struct CategoryPickerSelector: View {
             if categoryPosition == .vertical {
                 VStack(spacing: 0.0){
                     selectorButton
-                        .background(Color(UIColor.secondarySystemBackground).opacity(0.5))
-                        .cornerRadius(10)
+                        .background(Color.theme.background.opacity(0.2))
+                        .cornerRadius(15)
                         .zIndex(1)
                     pickerView
                 }
@@ -125,16 +133,14 @@ struct CategoryPickerSelector: View {
                 HStack(spacing: 0.0){
                     pickerView
                     selectorButton
-                        .background(Color(UIColor.secondarySystemBackground).opacity(0.5))
-                        .cornerRadius(10)
+                        .background(Color.theme.background.opacity(0.2))
+                        .cornerRadius(15)
                         .zIndex(1)
                 }
             }
         }
-        .background(show ? Color(UIColor.secondarySystemBackground).opacity(0.5) : Color.clear)
-        .cornerRadius(10)
-        .clipped()
-
+        .background(show ? Color.theme.background.opacity(0.5) : Color.clear)
+        .cornerRadius(15)
     }
 }
 // MARK: - CategoryPickerSelector - buttons
@@ -154,13 +160,13 @@ extension CategoryPickerSelector {
             DispatchQueue.main.asyncAfter(deadline: .now() + autoCloseTime) {
                 if show {
                     withAnimation(.spring()){
-                        show.toggle()
+                        show = false
                     }
                 }
             }
         } label: {
             Circle()
-                .fill(self.category?.color ??  Color(UIColor.secondarySystemFill))
+                .fill(note.category?.color ??  Color(UIColor.secondarySystemFill))
                 .frame(width: size, height: size)
                 .overlay(Circle().stroke(Color.primary, lineWidth: 1).opacity(show ? 1 : 0))
                 .padding(size / 2)
@@ -175,11 +181,11 @@ extension CategoryPickerSelector {
                 Divider()
                     .frame(width: size * 2, height: 1)
                     .opacity(show ? 1 : 0)
-                CategoryPicker(show: $show, category: $category, size: size, position: categoryPosition)
+                CategoryPicker(show: $show, category: $note.category, size: size, position: categoryPosition)
                     .zIndex(0)
                     .clipped()
             } else {
-                CategoryPicker(show: $show, category: $category, size: size, position: categoryPosition)
+                CategoryPicker(show: $show, category: $note.category, size: size, position: categoryPosition)
                     .zIndex(0)
                     .clipped()
                 Divider()

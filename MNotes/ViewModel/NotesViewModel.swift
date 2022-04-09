@@ -21,7 +21,12 @@ class NotesViewModel: ObservableObject {
     @Published var filteredNotes: [Note] = [] // Filtered Notes
     
     @Published var selectedNotes: [Note] = [] // Notes for deletion
-    @Published var selectedNoteID: String? // Selected Note ID for NavigationLink
+//    @Published var selectedNoteID: String? // Selected Note ID for NavigationLink
+    
+    // Detail View For Edit Note
+    @Published var selectedNote: Note = .infoNote // Selected Note for Detail View
+    @Published var showDetailView: Bool = false
+    @Published var currentCardSize: CGSize = .zero
     
     @Published var searchText: String = "" // Searchable text
     

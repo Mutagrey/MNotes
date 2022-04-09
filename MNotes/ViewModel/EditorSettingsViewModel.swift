@@ -46,19 +46,25 @@ struct FontSettings {
 class EditorSettingsViewModel: ObservableObject {
     
     @Published var showTextSettings: Bool = false
-
+    
+    @Published var showDetails: Bool = false
+    @Published var selectedImage: UIImage?
+    
     @Published var showApplyCurrentAttributesButton: Bool = false
     @Published var applyCurrentAttributes: Bool = false
     
     @Published var selectedText: String = ""
     @Published var selectedRange: NSRange?
-
+    @Published var selectedRangeUITextRange: UITextRange?
+    
+    
     @Published var fontSettings: FontSettings = .init()
     @Published  var currentAttributes: [NSAttributedString.Key : Any] = Note.defaultNSAttributes
     
     // Image Picker
     @Published var showImagePicker: Bool = false
     @Published var images: [UIImage] = []
+    @Published var smallImages: Bool = false
     
     private var cancelables = Set<AnyCancellable>() // cancellables
     

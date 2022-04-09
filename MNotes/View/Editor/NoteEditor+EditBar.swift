@@ -25,7 +25,7 @@ extension NoteEditor {
                     .background(Color(UIColor.secondarySystemBackground).opacity(0.7).ignoresSafeArea(.keyboard, edges: .bottom))
             }
         }
-
+        
     }
 }
 
@@ -105,11 +105,9 @@ extension NoteEditor {
             if settings.showApplyCurrentAttributesButton {
                 Button("Apply") {
                     settings.applyCurrentAttributes = true
-                    if let index = vm.notes.firstIndex(where: {$0.id == vm.selectedNoteID }) {
-                        if let range = settings.selectedRange {
-                            vm.notes[index].attributedText.addAttributes(settings.currentAttributes, range: range)
-                            settings.applyCurrentAttributes = false
-                        }
+                    if let range = settings.selectedRange {
+                        note.attributedText.addAttributes(settings.currentAttributes, range: range)
+                        settings.applyCurrentAttributes = false
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -148,6 +146,7 @@ extension NoteEditor {
 
         }
         .animation(.easeInOut, value: settings.showApplyCurrentAttributesButton)
+        .background(Color.theme.background.ignoresSafeArea())
 
     }
 }
