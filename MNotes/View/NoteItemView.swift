@@ -15,7 +15,7 @@ struct NoteItemView: View {
     let categorySize: CGFloat
         
     @State private var showCategoryPicker: Bool = false
-    
+
     private let cornerRadius: CGFloat = 17
     
     init(note: Binding<Note>, maxHeight: CGFloat = 100, categoryPosition: CategoryPosition = .vertical, categorySize: CGFloat = 13) {
@@ -28,23 +28,21 @@ struct NoteItemView: View {
     var body: some View {
         ZStack(alignment: .topTrailing) {
             gridView
-            CategoryPickerSelector(show: $showCategoryPicker, note: $note, size: categorySize, categoryPosition: categoryPosition)
+            CategoryPickerSelector(show: $showCategoryPicker, category: $note.category, size: categorySize, categoryPosition: categoryPosition)
                 .allowsHitTesting(!vm.isEditable)
-                // it doesnt work...need to fix......
-                .onChange(of: note) { newValue in
-                    print("cur category \(newValue.category?.rawValue ?? "")")
-                    vm.updateNote(note: newValue)
-                }
         }
         .background{
             ZStack{
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-//                    .shadow(color: Color.white.opacity(0.7), radius: 8, x: -5, y: -5)
                     .shadow(color: Color.black.opacity(0.7), radius: 5, x: 5, y: 5)
                     .blendMode(.overlay)
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                     .fill(Color.theme.noteColor)
             }
+        }
+        .overlay{
+            RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                .stroke(note.category?.color.opacity(0.3) ?? Color.white.opacity(0.5), lineWidth: 1)
         }
         .overlay{
             RadialGradient(colors: [
@@ -57,6 +55,10 @@ struct NoteItemView: View {
         }
         .overlay(SelectionButton(note: note), alignment: .bottomTrailing)
         .contextMenu { ContextMenu(note: $note) }
+        // Save changes
+        .onChange(of: note.category) { newValue in
+            vm.updateNote(note: note)
+        }
         
     }
     

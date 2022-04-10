@@ -12,7 +12,7 @@ struct Home: View {
     @State private var showCategoryPicker: Bool = false
     @State private var showSettings: Bool = false
     @Namespace var animation
-    
+        
     var body: some View {
         NavigationView {
             NotesCollection()
@@ -55,7 +55,6 @@ struct Home: View {
                     .hidden()
                 }
         }
-
         .navigationViewStyle(StackNavigationViewStyle())
         .searchable(text: $vm.searchText, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "Search Notes")
         .sheet(isPresented: $showSettings) {

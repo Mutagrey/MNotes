@@ -42,7 +42,7 @@ struct NoteEditor: View {
                 topToolBar(note: note)
             }
         }
-        .overlay(CategoryPickerSelector(show: $showCategoryPicker, note: $note, size: 20, categoryPosition: .vertical), alignment: .topTrailing)
+        .overlay(CategoryPickerSelector(show: $showCategoryPicker, category: $note.category, size: 20, categoryPosition: .vertical), alignment: .topTrailing)
         .sheet(isPresented: $settings.showImagePicker) {
             ImagePicker(results: $settings.images, attributedString: $note.attributedText)
         }

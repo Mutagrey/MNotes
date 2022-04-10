@@ -8,8 +8,6 @@
 import Foundation
 import SwiftUI
 
-
-
 //MARK: - Main Edit Bar
 extension NoteEditor {
     
@@ -25,7 +23,6 @@ extension NoteEditor {
                     .background(Color(UIColor.secondarySystemBackground).opacity(0.7).ignoresSafeArea(.keyboard, edges: .bottom))
             }
         }
-        
     }
 }
 

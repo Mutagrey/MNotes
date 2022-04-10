@@ -18,7 +18,7 @@ struct TabViewNotes: View {
                     NoteItemView(note: $note, maxHeight: maxHeight, categoryPosition: .horizontal, categorySize: 18)
                         .tag(note.id)
                         .padding(.horizontal)
-                        .padding(.bottom)
+                        .padding(.vertical)
                         .onTapGesture {
                             if vm.isEditable {
                                 vm.toggleSelected(note: note)

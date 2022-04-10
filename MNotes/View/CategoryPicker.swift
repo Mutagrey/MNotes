@@ -97,11 +97,9 @@ struct CategoryPickerSelector: View {
         case left
         case right
     }
-    
     @EnvironmentObject var vm: NotesViewModel
-    
     @Binding var show: Bool
-    @Binding var note: Note
+    @Binding var category: NoteCategory?
     
     let size: CGFloat
     let autoCloseTime: CGFloat
@@ -109,9 +107,9 @@ struct CategoryPickerSelector: View {
     
     @State private var showButtonAnimation: Bool = false
     
-    init(show: Binding<Bool>, note: Binding<Note>, size: CGFloat = 25, autoCloseTime: CGFloat = 3, categoryPosition: CategoryPosition = .vertical) {
+    init(show: Binding<Bool>, category: Binding<NoteCategory?>, size: CGFloat = 25, autoCloseTime: CGFloat = 3, categoryPosition: CategoryPosition = .vertical) {
         self._show = show
-        self._note = note
+        self._category = category
         self.size = size
         self.autoCloseTime = autoCloseTime
         self.categoryPosition = categoryPosition
@@ -164,7 +162,7 @@ extension CategoryPickerSelector {
             }
         } label: {
             Circle()
-                .fill(note.category?.color ??  Color(UIColor.secondarySystemFill))
+                .fill(category?.color ??  Color(UIColor.secondarySystemFill))
                 .frame(width: size, height: size)
                 .overlay(Circle().stroke(Color.primary, lineWidth: 1).opacity(show ? 1 : 0))
                 .padding(size / 2)
@@ -179,11 +177,11 @@ extension CategoryPickerSelector {
                 Divider()
                     .frame(width: size * 2, height: 1)
                     .opacity(show ? 1 : 0)
-                CategoryPicker(show: $show, category: $note.category, size: size, position: categoryPosition)
+                CategoryPicker(show: $show, category: $category, size: size, position: categoryPosition)
                     .zIndex(0)
                     .clipped()
             } else {
-                CategoryPicker(show: $show, category: $note.category, size: size, position: categoryPosition)
+                CategoryPicker(show: $show, category: $category, size: size, position: categoryPosition)
                     .zIndex(0)
                     .clipped()
                 Divider()
