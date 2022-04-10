@@ -43,7 +43,6 @@ struct Home: View {
                                 showCategoryPicker.toggle()
                             }
                         }
-                    
                 )
                 .overlay(ZStack{ if !vm.isEditable { AddNewNote(showCategoryPicker: $showCategoryPicker) } }, alignment: .bottomTrailing)
                 .animation(.easeInOut, value: vm.isEditable)

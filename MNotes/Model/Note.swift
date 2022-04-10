@@ -27,7 +27,7 @@ enum NoteCategory: String, CaseIterable, Codable {
         case .green:
             return Color(UIColor.systemGreen)
         case .default:
-            return Color(UIColor.secondarySystemFill)
+            return Color(UIColor.systemGray)
         }
     }
 }

@@ -30,12 +30,11 @@ struct NoteItemView: View {
             gridView
             CategoryPickerSelector(show: $showCategoryPicker, note: $note, size: categorySize, categoryPosition: categoryPosition)
                 .allowsHitTesting(!vm.isEditable)
-            // it doesnt work...need to fix......
-            .onChange(of: note) { newValue in
-                print("cur category \(newValue.category?.rawValue ?? "")")
-                vm.updateNote(note: newValue)
-            }
-
+                // it doesnt work...need to fix......
+                .onChange(of: note) { newValue in
+                    print("cur category \(newValue.category?.rawValue ?? "")")
+                    vm.updateNote(note: newValue)
+                }
         }
         .background{
             ZStack{

@@ -20,7 +20,6 @@ struct NoteEditor: View {
     @State private var showCategoryPicker: Bool = false
     @State private var category: NoteCategory?
     
-//    @State var note: Note = .init()
     @State var deletionAlert: Bool = false
         
     var body: some View {

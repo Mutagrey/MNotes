@@ -50,20 +50,22 @@ struct NotesList_Previews: PreviewProvider {
 extension NotesCollection {
     /// Row Element View
     private func content(category: NoteCategory) -> some View {
-        ForEach($vm.filteredNotes.filter({$0.category.wrappedValue == category})) { $note in
-            NoteItemView(note: $note, categoryPosition: .vertical)
-                .matchedGeometryEffect(id: note.id, in: animation)
-                .padding(padding)
-                .onTapGesture {
-                    if vm.isEditable {
-                        vm.toggleSelected(note: note)
-                    } else {
-                        vm.selectedNote = note
-                        withAnimation(.easeInOut) {
-                            vm.showDetailView = true
+        ForEach(vm.filteredNotes.filter({$0.category == category})) { note in
+            if let noteID = vm.filteredNotes.firstIndex(where: {$0.id == note.id }) {
+                NoteItemView(note: $vm.filteredNotes[noteID], categoryPosition: .vertical)
+                    .matchedGeometryEffect(id: note.id, in: animation)
+                    .padding(padding)
+                    .onTapGesture {
+                        if vm.isEditable {
+                            vm.toggleSelected(note: vm.filteredNotes[noteID])
+                        } else {
+                            vm.selectedNote = vm.filteredNotes[noteID]
+                            withAnimation(.easeInOut) {
+                                vm.showDetailView = true
+                            }
                         }
                     }
-                }
+            }
         }
     }
 }

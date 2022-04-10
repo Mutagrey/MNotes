@@ -19,14 +19,11 @@ class NotesViewModel: ObservableObject {
     
     @Published var notes: [Note] = [] // All availible Notes
     @Published var filteredNotes: [Note] = [] // Filtered Notes
-    
     @Published var selectedNotes: [Note] = [] // Notes for deletion
-//    @Published var selectedNoteID: String? // Selected Note ID for NavigationLink
     
     // Detail View For Edit Note
     @Published var selectedNote: Note = .infoNote // Selected Note for Detail View
-    @Published var showDetailView: Bool = false
-    @Published var currentCardSize: CGSize = .zero
+    @Published var showDetailView: Bool = false // Show Note Editor
     
     @Published var searchText: String = "" // Searchable text
     
@@ -40,13 +37,6 @@ class NotesViewModel: ObservableObject {
     init() {
         readNotes()
         filterNotes()
-    }
-}
-
-// MARK: - Update Selected Note Attributes
-extension NotesViewModel {
-    func updateSelectedNoteAttributes() {
-        
     }
 }
 

@@ -98,18 +98,16 @@ struct CategoryPickerSelector: View {
         case right
     }
     
-    
     @EnvironmentObject var vm: NotesViewModel
-
+    
     @Binding var show: Bool
     @Binding var note: Note
+    
     let size: CGFloat
     let autoCloseTime: CGFloat
-    
     let categoryPosition: CategoryPosition
     
     @State private var showButtonAnimation: Bool = false
-    
     
     init(show: Binding<Bool>, note: Binding<Note>, size: CGFloat = 25, autoCloseTime: CGFloat = 3, categoryPosition: CategoryPosition = .vertical) {
         self._show = show
