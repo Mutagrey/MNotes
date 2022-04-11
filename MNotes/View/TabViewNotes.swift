@@ -15,20 +15,22 @@ struct TabViewNotes: View {
         if vm.filteredNotes.filter({ $0.isPinned }).count > 0 {
             TabView(selection: $selectedNoteID) {
                 ForEach($vm.filteredNotes.filter({ $0.isPinned.wrappedValue })) { $note in
-                    NoteItemView(note: $note, maxHeight: maxHeight, categoryPosition: .horizontal, categorySize: 18)
-                        .tag(note.id)
-                        .padding(.horizontal)
-                        .padding(.vertical)
-                        .onTapGesture {
-                            if vm.isEditable {
-                                vm.toggleSelected(note: note)
-                            } else {
-                                vm.selectedNote = note
-                                withAnimation(.easeInOut) {
-                                    vm.showDetailView = true
-                                }
+                    Button {
+                        if vm.isEditable {
+                            vm.toggleSelected(note: note)
+                        } else {
+                            vm.selectedNote = note
+                            withAnimation(.easeInOut) {
+                                vm.showDetailView = true
                             }
                         }
+                    } label: {
+                        NoteItemView(note: $note, maxHeight: maxHeight, categoryPosition: .horizontal, categorySize: 18)
+                            .tag(note.id)
+                            .padding(.horizontal)
+                            .padding(.bottom)
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))

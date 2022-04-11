@@ -40,7 +40,6 @@
 		41C3FF8527F6227100ACEA9B /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FF8427F6227100ACEA9B /* UIImage.swift */; };
 		41C3FF8727F6FD4D00ACEA9B /* Note+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FF8627F6FD4D00ACEA9B /* Note+Info.swift */; };
 		41C3FF8927F71EDC00ACEA9B /* Note+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FF8827F71EDC00ACEA9B /* Note+Codable.swift */; };
-		41C3FF8D27FA238800ACEA9B /* NeumorphicModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FF8C27FA238800ACEA9B /* NeumorphicModifier.swift */; };
 		41C3FFB627FE0D8300ACEA9B /* ScaledButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FFB527FE0D8300ACEA9B /* ScaledButtonStyle.swift */; };
 		41C3FFBA27FE0FA300ACEA9B /* OffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3FFB927FE0FA300ACEA9B /* OffsetModifier.swift */; };
 /* End PBXBuildFile section */
@@ -80,7 +79,6 @@
 		41C3FF8427F6227100ACEA9B /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		41C3FF8627F6FD4D00ACEA9B /* Note+Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Info.swift"; sourceTree = "<group>"; };
 		41C3FF8827F71EDC00ACEA9B /* Note+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Codable.swift"; sourceTree = "<group>"; };
-		41C3FF8C27FA238800ACEA9B /* NeumorphicModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphicModifier.swift; sourceTree = "<group>"; };
 		41C3FFB527FE0D8300ACEA9B /* ScaledButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledButtonStyle.swift; sourceTree = "<group>"; };
 		41C3FFB927FE0FA300ACEA9B /* OffsetModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffsetModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,7 +171,6 @@
 				411819D627E8B35300668067 /* SettingsView.swift */,
 				41C3FF8227F4DCC500ACEA9B /* ImagePicker.swift */,
 				411819AD27E78A8F00668067 /* Editor */,
-				41C3FF8C27FA238800ACEA9B /* NeumorphicModifier.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -319,7 +316,6 @@
 				411819D727E8B35300668067 /* SettingsView.swift in Sources */,
 				4170430E27E1ED9100E894C0 /* Date.swift in Sources */,
 				4170434827E3D36800E894C0 /* NotesDataService.swift in Sources */,
-				41C3FF8D27FA238800ACEA9B /* NeumorphicModifier.swift in Sources */,
 				41C3FF8927F71EDC00ACEA9B /* Note+Codable.swift in Sources */,
 				411819DB27EA3E4F00668067 /* ShareButton.swift in Sources */,
 				411819D527E8915700668067 /* ContextMenu.swift in Sources */,

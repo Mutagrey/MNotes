@@ -37,7 +37,6 @@ struct NotesList_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ContentView()
-            ContentView()
                 .preferredColorScheme(.dark)
         }
         .previewLayout(.sizeThatFits)
@@ -48,23 +47,26 @@ struct NotesList_Previews: PreviewProvider {
 
 // MARK: - Content
 extension NotesCollection {
-    /// Row Element View
+
     private func content(category: NoteCategory) -> some View {
         ForEach(vm.filteredNotes.filter({$0.category == category})) { note in
             if let noteID = vm.filteredNotes.firstIndex(where: {$0.id == note.id }) {
-                NoteItemView(note: $vm.filteredNotes[noteID], categoryPosition: .vertical)
-                    .matchedGeometryEffect(id: note.id, in: animation)
-                    .padding(padding)
-                    .onTapGesture {
-                        if vm.isEditable {
-                            vm.toggleSelected(note: vm.filteredNotes[noteID])
-                        } else {
-                            vm.selectedNote = vm.filteredNotes[noteID]
-                            withAnimation(.easeInOut) {
-                                vm.showDetailView = true
-                            }
+                Button {
+                    if vm.isEditable {
+                        vm.toggleSelected(note: vm.filteredNotes[noteID])
+                    } else {
+                        vm.selectedNote = vm.filteredNotes[noteID]
+                        withAnimation(.easeInOut) {
+                            vm.showDetailView = true
                         }
                     }
+                } label: {
+                    NoteItemView(note: $vm.filteredNotes[noteID], categoryPosition: .vertical)
+                        .matchedGeometryEffect(id: note.id, in: animation)
+                        .padding(padding)
+                }
+                .buttonStyle(PlainButtonStyle())
+
             }
         }
     }
@@ -73,42 +75,32 @@ extension NotesCollection {
 // MARK: - Headers for LazyVGrid
 extension NotesCollection {
     private var headerView: some View{
-        VStack(spacing: 6.0){
-            HStack {
-                Text("Pinned Notes")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.primary)
-                Spacer()
-                Button {
-                    withAnimation(.easeInOut) {
-                        showPinnedCollection.toggle()
-                    }
-                } label: {
-                    HStack{
-                        let count = vm.notes.filter({$0.isPinned}).count
-                        Image(systemName: "chevron.right")
-                            .frame(width: 15, height: 15)
-                            .rotationEffect(.init(degrees: (showPinnedCollection && count > 0) ? 90 : 0))
-                            .foregroundColor(count == 0 ? Color.gray : Color.accentColor)
-                        Text("\(count)")
-                            .foregroundColor(count == 0 ? Color.gray : Color.accentColor)
-                        Image(systemName: count == 0 ? "pin" : "pin.fill")
-                            .foregroundColor(Color(UIColor.systemIndigo))
-                            .font(.headline)
-                    }
-                    .font(.subheadline)
-                    .padding(5)
-                    .padding(.horizontal, 8)
-                    .mask(Capsule())
-                }
-            }
-            .padding(.horizontal)
-            .contentShape(Rectangle())
-            .onTapGesture {
+        VStack(spacing: 0.0){
+            Button {
                 withAnimation(.easeInOut) {
                     showPinnedCollection.toggle()
                 }
+            } label: {
+                HStack{
+                    let count = vm.notes.filter({$0.isPinned}).count
+                    Image(systemName: count == 0 ? "pin" : "pin.fill")
+                        .foregroundColor(Color(UIColor.systemIndigo))
+                        .font(.headline)
+                    Text("Pinned Notes")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.primary)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .frame(width: 15, height: 15)
+                        .rotationEffect(.init(degrees: (showPinnedCollection && count > 0) ? 90 : 0))
+                        .foregroundColor(count == 0 ? Color.gray : Color.accentColor)
+                    Text("\(count)")
+                        .foregroundColor(count == 0 ? Color.gray : Color.accentColor)
+                }
+                .font(.headline)
+                .padding(10)
+                .padding(.horizontal, 8)
             }
             if showPinnedCollection {
                 TabViewNotes()
@@ -116,7 +108,12 @@ extension NotesCollection {
                     .opacity(showPinnedCollection ? 1 : 0)
             }
         }
-        .clipped()
+        .background{
+            Color.theme.noteColor.opacity(0.5)
+                .cornerRadius(17)
+        }
+        .padding(5)
+        .padding(.horizontal, 8)
 
     }
     

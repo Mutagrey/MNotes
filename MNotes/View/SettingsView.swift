@@ -10,7 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.presentationMode) var presentationMode
     @AppStorage("padding") var padding: Double = 3
-    @AppStorage("cornerRadius") var cornerRadius: Double = 12
+//    @AppStorage("cornerRadius") var cornerRadius: Double = 12
     @AppStorage("columns") var columns: Int = 2
 //    @AppStorage("bgColor") var bgColor: Color = Color(UIColor.secondarySystemBackground)
 //    @AppStorage("sortBy") var sortBy: SortBy = .category
@@ -58,14 +58,14 @@ extension SettingsView {
                 }
             }
             
-            VStack {
-                Slider(value: $cornerRadius, in: 0...20, step: 1)
-                HStack {
-                    Text("Corner Radius")
-                    Spacer()
-                    Text("\(cornerRadius, specifier: "%.0f")")
-                }
-            }
+//            VStack {
+//                Slider(value: $cornerRadius, in: 0...20, step: 1)
+//                HStack {
+//                    Text("Corner Radius")
+//                    Spacer()
+//                    Text("\(cornerRadius, specifier: "%.0f")")
+//                }
+//            }
             
             Picker("Columns", selection: $columns) {
                 ForEach(1...5, id: \.self) { index in

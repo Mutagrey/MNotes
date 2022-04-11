@@ -56,7 +56,7 @@ struct Home: View {
                 }
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .searchable(text: $vm.searchText, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "Search Notes")
+        .searchable(text: $vm.searchText, placement: .automatic, prompt: "Search Notes")
         .sheet(isPresented: $showSettings) {
             SettingsView()
         }
